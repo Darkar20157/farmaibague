@@ -47,5 +47,19 @@ if(isset($_POST['cost'])){
     }catch(Exception $ex){
         echo $ex;
     }
+}elseif(isset($_POST['nit'])){
+    try{
+        $nit = $_POST['nit'];
+        $name = $_POST['name_vendor'];
+        $dir = $_POST['dir'];
+        $tel = $_POST['tel'];
+        $sql = "INSERT INTO VENDORS(NIT_VENDOR, NAME_VENDOR, ADDRESS_VENDOR, PHONE_VENDOR) VALUES('$nit', '$name', '$dir', $tel)";
+        $consult = mysqli_query($conexion, $sql);
+    if($consult){
+        echo "Correcto";
+    }
+    }catch(Exception $ex){
+        echo $ex;
+    }
 }
 ?>

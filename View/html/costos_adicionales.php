@@ -21,6 +21,41 @@ require 'header.php';
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h3><img src="https://img.icons8.com/ios-filled/50/null/settings-3.png"/> Proveedores</h3>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <!-- Consulta para buscar la persona quien recibe el inventario -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h5 id="cargando1">Nit. Proveedor</h5>
+            <input class="form-control" type="text" id="nitVendor" name="nitVendor">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h5 id="cargando1">Nombre del Proveedor</h5>
+            <input class="form-control" type="text" id="nameVendor" name="nameVendor">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h5 id="cargando1">Direccion del Proveedor</h5>
+            <input class="form-control" type="text" id="addressVendor" name="addressVendor">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h5 id="cargando1">Celular del Proveedor</h5>
+            <input class="form-control" type="number" id="phoneProveedor" name="phoneProveedor">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <button class="btn btn-primary" style="width: 100%;" onclick="aggVendor()">Agregar Proveedor</button>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <h3><img src="https://img.icons8.com/ios-filled/50/null/settings-3.png"/> Configuracion Descuentos</h3>
         </div>
     </div>
@@ -194,6 +229,54 @@ require 'header.php';
                         <tr class="footers">
                             <th>Id</th>
                             <th>Metodo de Pago</th>
+                            <th>Accion</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="table-responsive">
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Nit Proveedor</th>
+                            <th>Nombre Proveedor</th>
+                            <th>Direccion Proveedor</th>
+                            <th>Telefono Proveedor</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * 
+                        FROM VENDORS";
+                        $consult = mysqli_query($conexion, $sql);
+                    ?>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_assoc($consult)){
+                        ?>
+                            <tr>
+                                <td><?php echo $row['NIT_VENDOR'] ?></td>
+                                <td><?php echo $row['NAME_VENDOR'] ?></td>
+                                <td><?php echo $row['ADDRESS_VENDOR'] ?></td>
+                                <td><?php echo $row['PHONE_VENDOR'] ?></td>
+                                <td><button class="btn btn-danger" onclick="eliminar('PAYMENT_METHOD', <?php echo $row['ID'] ?>)">Eliminar</button></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr class="footers">
+                            <th>Nit Proveedor</th>
+                            <th>Nombre Proveedor</th>
+                            <th>Direccion Proveedor</th>
+                            <th>Telefono Proveedor</th>
                             <th>Accion</th>
                         </tr>
                     </tfoot>
