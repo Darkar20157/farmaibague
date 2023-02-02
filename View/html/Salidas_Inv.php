@@ -239,15 +239,23 @@ require 'header.php';
                         <tr class="table-dark">
                             <th>Numero Factura</th>
                             <th>Cedula Cliente</th>
-                            <th>Fecha del Voucher</th>
+                            <th>Nombres</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Fecha Fact.</th>
                             <th>Codigo de barras</th>
                             <th>Nombre Producto</th>
-                            <th>Unidad/Medida</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
-                            <th>Cant./Articulos</th>
-                            <th>Total/Articulo</th>
+                            <th>Descuento</th>
+                            <th>Valor Desc.</th>
+                            <th>Costo Adicional</th>
+                            <th>Valor Cost.</th>
+                            <th>Metodo Pago</th>
+                            <th>SubTotal</th>
                             <th>Total Factura</th>
+                            <th>Pago Cliente</th>
+                            <th>Cambio</th>
                             <th>Imprimir</th>
                         </tr>
                     </thead>
@@ -286,15 +294,23 @@ require 'header.php';
                             <tr>
                                 <td><?php echo $rows2['NRO_FACTURA'] ?></td>
                                 <td><?php echo $rows2['CED_NRO'] ?></td>
+                                <td><?php echo $rows2['NAMES'] ?></td>
+                                <td><?php echo $rows2['ADDRES'] ?></td>
+                                <td><?php echo $rows2['PHONE'] ?></td>
                                 <td><?php echo $rows2['DATE_VOUCHER'] ?></td>
                                 <td><?php echo $rows2['BARCODE'] ?></td>
                                 <td><?php echo $rows2['NAME_PRODUCT'] ?></td>
-                                <td><?php echo $rows2['GRAMMAGE_MINIMETERAGE']?></td>
                                 <td><?php echo $rows2['AMOUNT'] ?></td>
-                                <td><?php echo $rows2['PRICE_UNID'] ?></td>
-                                <td><?php echo $rows2['TOTAL_ITEMS'] ?></td>
-                                <td><?php echo $rows2['TOTAL_REGISTER'] ?></td>
-                                <td><?php echo $rows2['TOTAL_VOUCHER'] ?></td>
+                                <td>$<?php echo $rows2['PRICE_UNID'] ?></td>
+                                <td><?php echo $rows2['DISCOUNT_NAME'] ?></td>
+                                <td><?php echo $rows2['DISCOUNT_PRICE'] ?>%</td>
+                                <td><?php echo $rows2['COST_ADDITIONAL'] ?></td>
+                                <td>$<?php echo $rows2['PRICE'] ?></td>
+                                <td><?php echo $rows2['PAYMENT_NAME'] ?></td>
+                                <td>$<?php echo $rows2['TOTAL_REGISTER'] ?></td>
+                                <td>$<?php echo $rows2['TOTAL_VOUCHER'] ?></td>
+                                <td>$<?php echo $rows2['PAY_CLIENT'] ?></td>
+                                <td>$<?php echo $rows2['EXCHANGE'] ?></td>
                                 <td><button class="btn btn-success" onclick="imprimir('<?php echo $rows2['NRO_FACTURA']?>')">Imprimir</button></td>
                             </tr>
                         <?php
@@ -305,15 +321,23 @@ require 'header.php';
                         <tr class="footers">
                             <th>Numero Factura</th>
                             <th>Cedula Cliente</th>
-                            <th>Fecha del Voucher</th>
+                            <th>Nombres</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Fecha Fact.</th>
                             <th>Codigo de barras</th>
                             <th>Nombre Producto</th>
-                            <th>Unidad/Medida</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
-                            <th>Total Articulos</th>
-                            <th>Total por Articulo</th>
+                            <th>Descuento</th>
+                            <th>Valor Desc.</th>
+                            <th>Costo Adicional</th>
+                            <th>Valor Cost.</th>
+                            <th>Metodo Pago</th>
+                            <th>SubTotal</th>
                             <th>Total Factura</th>
+                            <th>Pago Cliente</th>
+                            <th>Cambio</th>
                             <th>Imprimir</th>
                         </tr>
                     </tfoot>
