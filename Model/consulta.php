@@ -23,12 +23,14 @@ if(isset($_POST['cod'])){
     print_r($JSON);
 }elseif(isset($_POST['barcode'])){
     $cod = $_POST['barcode'];
+    $embalaje = $_POST['embalaje'];
     $sql = "SELECT * 
     FROM 
     INVENTARIO INV 
     INNER JOIN DETAIL_ART DA 
     ON INV.BARCODE = DA.BARCODE
-    WHERE INV.BARCODE = $cod";
+    WHERE INV.BARCODE = $cod
+    AND INV.PACKAGING = '$embalaje'";
     $consult = mysqli_query($conexion,$sql);
     $array = mysqli_fetch_assoc($consult);
     $JSON = json_encode($array);

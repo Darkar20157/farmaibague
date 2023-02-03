@@ -85,6 +85,7 @@ if(isset($_POST['ced'])){
                             "BARCODE" => $row2['BARCODE'], 
                             "AMOUNT" => $row2['AMOUNT'],
                             "PRICE_UNID" => $row2['PRICE'],
+                            "PACKAGING" => $row2['PACKAGING'],
                             "TOTAL_ITEMS" => $items,
                             "DISCOUNT_ID" => $row2['DISCOUNT_ID'],
                             "TOTAL_REGISTER" => $row2['TOTAL'] - $descuento,
@@ -97,12 +98,13 @@ if(isset($_POST['ced'])){
                     $barcode = $array[$i]['BARCODE'];
                     $amount = $array[$i]['AMOUNT'];
                     $priceUnid = $array[$i]['PRICE_UNID'];
+                    $embalaje = $array[$i]['PACKAGING'];
                     $items = $array[$i]['TOTAL_ITEMS'];
                     $discount = $array[$i]['DISCOUNT_ID'];
                     $total_register = $array[$i]['TOTAL_REGISTER'];
                     $total_voucher = $array[$i]['TOTAL_VOUCHER'];
-                    $sql3 = "INSERT INTO SALES(NRO_FACTURA, CED_NRO, DATE_VOUCHER, BARCODE, AMOUNT, PRICE_UNID, DISCOUNT_ID, COST_ADDITIONAL_ID, TOTAL_ITEMS, PAYMENT_METHOD_ID, PAY_CLIENT, EXCHANGE, TOTAL_REGISTER, TOTAL_VOUCHER)
-                    VALUES('$id', $cedsale, '$date', $barcode, $amount, $priceUnid, $discount, $costAdi, $items, $methodPay, $pago, $cambio, $total_register, $total_voucher)";
+                    $sql3 = "INSERT INTO SALES(NRO_FACTURA, CED_NRO, DATE_VOUCHER, BARCODE, AMOUNT, PRICE_UNID, PACKAGING, DISCOUNT_ID, COST_ADDITIONAL_ID, TOTAL_ITEMS, PAYMENT_METHOD_ID, PAY_CLIENT, EXCHANGE, TOTAL_REGISTER, TOTAL_VOUCHER)
+                    VALUES('$id', $cedsale, '$date', $barcode, $amount, $priceUnid, '$embalaje', $discount, $costAdi, $items, $methodPay, $pago, $cambio, $total_register, $total_voucher)";
                     $consult3 = mysqli_query($conexion, $sql3);
                 }
                 $array2 = [];

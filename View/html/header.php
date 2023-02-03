@@ -123,6 +123,7 @@ if($TP == 1){
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/gestion_productos.php") ?>">Gestion Productos</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/Entradas_Inv.php");?>">Entradas Inventario</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/Salidas_Inv.php"); ?>">Ventas</a>
+            <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/reportes.php"); ?>">Reportes</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/costos_adicionales.php"); ?>">Configuracion</a>
         </ul>
     </nav>

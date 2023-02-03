@@ -6,14 +6,14 @@ require_once "Conexiones.php";
 if(isset($_POST['cod'])){
     $cod = $_POST['cod'];
     $nom = $_POST['nom'];
-    $mar = $_POST['mar'];
     $gram = $_POST['gram'];
     $cant = $_POST['cant'];
     $precio = $_POST['pre'];
     $discount = $_POST['dis'];
+    $embalaje = $_POST['emb'];
     
-    $sql = "INSERT INTO DETAIL_PRODUCT(BARCODE, NAME_PRODUCT, AMOUNT, GRAMMAGE_MINIMETERAGE, BRAND, PRICE, DISCOUNT_ID) 
-    VALUES($cod, '$nom', $cant, '$gram', '$mar', $precio, $discount)";
+    $sql = "INSERT INTO DETAIL_PRODUCT(BARCODE, NAME_PRODUCT, AMOUNT, GRAMMAGE_MINIMETERAGE, PRICE, DISCOUNT_ID, PACKAGING) 
+    VALUES($cod, '$nom', $cant, '$gram', $precio, $discount, '$embalaje')";
     $result = mysqli_query($conexion, $sql);
     if($result){
         $sql2 = "SELECT * FROM DETAIL_PRODUCT";
@@ -25,9 +25,9 @@ if(isset($_POST['cod'])){
             <tr>
                 <td><?php echo $row2['BARCODE']; ?></td>
                 <td><?php echo $row2['NAME_PRODUCT']; ?></td>
-                <td><?php echo $row2['BRAND']; ?></td>
                 <td><?php echo $row2['GRAMMAGE_MINIMETERAGE']; ?></td>
                 <td><?php echo $row2['AMOUNT']; ?></td>
+                <td><?php echo $row2['PACKAGING']; ?></td>
                 <td><?php echo $row2['PRICE']; ?></td>
                 <td><?php echo $row2['DISCOUNT_ID']; ?></td>
                 <td><button class="btn btn-outline-danger" id="<?php echo $row2['BARCODE'] ?>" onclick="eliminarUnidad(<?php echo $row2['BARCODE'] ?>)">X</button></td>

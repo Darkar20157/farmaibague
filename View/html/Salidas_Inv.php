@@ -106,9 +106,9 @@ require 'header.php';
                 <table class="table table-hover" id="table">
                     <thead>
                         <tr class="table-dark">
-                            <th>Agregar un Producto</th>
+                            <th>Embalaje</th>
+                            <th>Agregar Producto</th>
                             <th>Producto</th>
-                            <th>Laboratorio</th>
                             <th>Unid/Medida</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
@@ -120,11 +120,19 @@ require 'header.php';
                     <tbody>
                         <tr>
                             <td>
+                                <select class="form-select" name="embalaje" id="embalaje">
+                                    <option value="">Seleccione</option>
+                                    <option value="Caja">Caja</option>
+                                    <option value="Unidad">Unidad</option>
+                                    <option value="Blister">Blister</option>
+                                </select>
+                            </td>
+                            <td>
                                 <select style="width: 100%" class="select2" name="cod_salida" id="cod_salida" onchange="productoSalidas()">
-                                    <option value="">Seleccione el codigo</option>
+                                    <option value="">Seleccione Codigo</option>
                                     <?php
                                     $sql = "SELECT * 
-                                    FROM INVENTARIO ";
+                                    FROM INVENTARIO GROUP BY BARCODE";
                                     $consul = mysqli_query($conexion,$sql);
                                     while($row = mysqli_fetch_assoc($consul)){
                                         $COD = $row['BARCODE'];
@@ -137,7 +145,6 @@ require 'header.php';
                                 </select>
                             </td>
                             <td><input class="form-control" type="text" id="producto_salida" readonly></td>
-                            <td><input class="form-control" type="text" id="marca" readonly></td>
                             <td><input class="form-control" type="text" id="gramaje" readonly></td>
                             <td><input class="form-control" type="number" id="cantidad"></td>
                             <td><input class="form-control" type="number" id="precio" readonly></td>
@@ -167,9 +174,9 @@ require 'header.php';
                         <tr>
                             <th>Codigo Producto</th>
                             <th>Producto</th>
-                            <th>Laboratorio</th>
                             <th>Unid/Medida</th>
                             <th>Cantidad</th>
+                            <th>Embalaje</th>
                             <th>Precio</th>
                             <th>Id. Descuento</th>
                             <th>Accion</th>
@@ -243,10 +250,11 @@ require 'header.php';
                             <th>Direccion</th>
                             <th>Celular</th>
                             <th>Fecha Fact.</th>
-                            <th>Codigo de barras</th>
+                            <th>Codigo Barras</th>
                             <th>Nombre Producto</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
+                            <th>Embalaje</th>
                             <th>Descuento</th>
                             <th>Valor Desc.</th>
                             <th>Costo Adicional</th>
@@ -272,6 +280,7 @@ require 'header.php';
                         BR.NAME_PRODUCT,
                         SL.AMOUNT,
                         SL.PRICE_UNID,
+                        SL.PACKAGING,
                         DS.DISCOUNT_NAME,
                         DS.DISCOUNT_PRICE,
                         CA.COST_ADDITIONAL,
@@ -302,6 +311,7 @@ require 'header.php';
                                 <td><?php echo $rows2['NAME_PRODUCT'] ?></td>
                                 <td><?php echo $rows2['AMOUNT'] ?></td>
                                 <td>$<?php echo $rows2['PRICE_UNID'] ?></td>
+                                <td><?php echo $rows2['PACKAGING'] ?></td>
                                 <td><?php echo $rows2['DISCOUNT_NAME'] ?></td>
                                 <td><?php echo $rows2['DISCOUNT_PRICE'] ?>%</td>
                                 <td><?php echo $rows2['COST_ADDITIONAL'] ?></td>
@@ -329,6 +339,7 @@ require 'header.php';
                             <th>Nombre Producto</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
+                            <th>Embalaje</th>
                             <th>Descuento</th>
                             <th>Valor Desc.</th>
                             <th>Costo Adicional</th>

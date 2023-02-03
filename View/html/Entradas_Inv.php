@@ -33,10 +33,6 @@ require "header.php";
     </div>
     <br>
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
-            <h5>Fecha de Entrada (*)</h5>
-            <input class="form-control" type="datetime-local" name="fecha_entradas" id="fecha_entradas">
-        </div>
         <!-- Activamos o desactivamos casillas con un click -->
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h5 id="selector1">Codigo producto (*)</h5>
@@ -53,62 +49,25 @@ require "header.php";
                 ?>
             </select>
         </div>
-    </div>
-    <br>
-    <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h5>Producto (*)</h5>
             <input class="form-control" id="producto_entrada" name="producto_entrada" type="text">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <h5>Precio Unitario (*)</h5>
-            <input class="form-control" type="number" name="precio" id="precio">
-        </div>
     </div>
     <br>
-
     <div class="row">
-        <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <h5>Categoria (*)</h5>
-            <select class="form-select" name="categoria" id="categoria">
-                <option value="">Selecciona un opcion</option>
-                <?php
-                /*
-                $sql3 = "SELECT * FROM CATEGORY";
-                $consult = mysqli_query($conexion, $sql3);
-                while($row = mysqli_fetch_assoc($consult)){
-                ?>
-                <option value="<?php echo $row['ID'] ?>"><?php echo $row['NAME_CATEGORY'] ?></option>
-                <?php
-                }
-                */
-                ?>
-            </select>
-        </div> -->
-        <!--         
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <h5>Detalle Producto (*)</h5>
-            <select class="form-select" id="marca_producto" name="marca_producto">
-                <option value="">Selecciona un opcion</option>
-                <?php
-                $sql3 = "SELECT * FROM DETAIL_ART";
-                $consult = mysqli_query($conexion, $sql3);
-                while($row = mysqli_fetch_assoc($consult)){
-                    $conCatDetailArt = $row['NAME_PRODUCT'] . " - " . $row['GRAMMAGE_MINIMETERAGE'] ." - ". $row['BRAND'];
-                ?>
-                <option value="<?php echo $row['ID'] ?>"><?php echo $conCatDetailArt?></option>
-                <?php
-                }
-                ?>
-            </select>
-            <input class="form-control" maxlength="119" type="text" id="marca_producto" name="marca_producto">
-        </div> 
-        -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h5>Precio Unitario Venta (*)</h5>
+            <input class="form-control" type="number" name="precio" id="precio">
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h5>Cantidad (*)</h5>
             <input class="form-control" type="number" name="cantidad_entrada" id="cantidad_entrada" min="0" max="100000">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <h5>Nombre Proveedor (*)</h5>
             <select class="form-select" id="proveedor_producto" name="proveedor_producto" onchange="vendors()">
                 <option value="">Selecciona un opcion</option>
@@ -122,7 +81,19 @@ require "header.php";
                 }
                 ?>
             </select>
-            <!-- <input class="form-control" maxlength="119" type="text" id="proveedor_producto" name="proveedor_producto"> -->
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h5>Embalaje (*)</h5>
+            <select class="form-select" id="packaging" name="packaging" onchange="vendors()">
+                <option value="">Selecciona un opcion</option>
+                <option value="Unidad">Unidad</option>
+                <option value="Blister">Blister</option>
+                <option value="Caja">Caja</option>
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h5>Precio de Compra</h5>
+            <input class="form-control" type="number" id="priceBuy" name="priceBuy">
         </div>
     </div>
     <br>
@@ -163,6 +134,8 @@ require "header.php";
                             <th>Nit Proveedor</th>
                             <th>Fecha Ingreso</th>
                             <th>Price</th>
+                            <th>Embalaje</th>
+                            <th>Precio Compra</th>
                             <th>Novedades</th>
                         </tr>
                     </thead>
@@ -178,10 +151,12 @@ require "header.php";
                                 <td><?php echo $row['NIT_VENDOR']; ?></td>
                                 <td><?php echo $row['DATE_CREATION']; ?></td>
                                 <td><?php echo $row['PRICE_UNID']; ?></td>
+                                <td><?php echo $row['PACKAGING']; ?></td>
+                                <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
                             </tr>
                         <?php
-                        }elseif($row['AMOUNT'] <= 100){
+                        }elseif($row['AMOUNT'] <= 30){
                             ?>
                             <tr class="table-warning">
                                 <td><?php echo $row['BARCODE']; ?></td>
@@ -190,6 +165,8 @@ require "header.php";
                                 <td><?php echo $row['NIT_VENDOR']; ?></td>
                                 <td><?php echo $row['DATE_CREATION']; ?></td>
                                 <td><?php echo $row['PRICE_UNID']; ?></td>
+                                <td><?php echo $row['PACKAGING']; ?></td>
+                                <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
                             </tr>
                         <?php
@@ -202,6 +179,8 @@ require "header.php";
                                 <td><?php echo $row['NIT_VENDOR']; ?></td>
                                 <td><?php echo $row['DATE_CREATION']; ?></td>
                                 <td><?php echo $row['PRICE_UNID']; ?></td>
+                                <td><?php echo $row['PACKAGING']; ?></td>
+                                <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
                             </tr>
                         <?php
@@ -219,6 +198,8 @@ require "header.php";
                             <th>Nit Proveedor</th>
                             <th>Fecha Ingreso</th>
                             <th>Price</th>
+                            <th>Embalaje</th>
+                            <th>Precio Compra</th>
                             <th>Novedades</th>
                         </tr>
                     </tfoot>
@@ -261,11 +242,11 @@ require "header.php";
                             <th>Laboratorio</th>
                             <th>Cant. Producto</th>
                             <th>Price</th>
+                            <th>Embalaje</th>
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Celular Proveedor</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
@@ -279,14 +260,15 @@ require "header.php";
                                 <td><?php echo $row['GRAMMAGE_MINIMETERAGE']; ?></td>
                                 <td><?php echo $row['BRAND']; ?></td>
                                 <td><?php echo $row['AMOUNT']; ?></td>
-                                <td><?php echo $row['PRICE_UNID']; ?></td>
+                                <td><?php echo $row['PRICE']; ?></td>
+                                <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['NIT_VENDOR']; ?></td>
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
                             </tr>
                         <?php
-                        }elseif($row['AMOUNT'] <= 100){
+                        }elseif($row['AMOUNT'] <= 30){
                             ?>
                             <tr class="table-warning">
                                 <td><?php echo $row['BARCODE']; ?></td>
@@ -294,7 +276,8 @@ require "header.php";
                                 <td><?php echo $row['GRAMMAGE_MINIMETERAGE']; ?></td>
                                 <td><?php echo $row['BRAND']; ?></td>
                                 <td><?php echo $row['AMOUNT']; ?></td>
-                                <td><?php echo $row['PRICE_UNID']; ?></td>
+                                <td><?php echo $row['PRICE']; ?></td>
+                                <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['NIT_VENDOR']; ?></td>
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
@@ -309,7 +292,8 @@ require "header.php";
                                 <td><?php echo $row['GRAMMAGE_MINIMETERAGE']; ?></td>
                                 <td><?php echo $row['BRAND']; ?></td>
                                 <td><?php echo $row['AMOUNT']; ?></td>
-                                <td><?php echo $row['PRICE_UNID']; ?></td>
+                                <td><?php echo $row['PRICE']; ?></td>
+                                <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['NIT_VENDOR']; ?></td>
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
@@ -330,6 +314,7 @@ require "header.php";
                             <th>Laboratorio</th>
                             <th>Cant. Producto</th>
                             <th>Price</th>
+                            <th>Embalaje</th>
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>

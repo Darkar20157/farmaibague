@@ -211,10 +211,12 @@ function datosEntrega(){
 //Dinamismo y busqueda del producto
 function productoSalidas(){
     let codP = $("#cod_salida").val();
+    let embalaje = $("#embalaje").val();
     let col = document.getElementById("cargando");
     col.innerHTML = "<div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div>";
     let array = {
-        "barcode": codP
+        "barcode": codP,
+        "embalaje": embalaje
     };
     $.ajax({
         type: "POST",
@@ -222,12 +224,26 @@ function productoSalidas(){
         url: "Model/consulta.php",
         data: array,
         success: function(response){
-            let col = document.getElementById("cargando");
-            col.innerHTML = "";
-            $("#producto_salida").val(response.NAME_PRODUCT);
-            $("#marca").val(response.BRAND);
-            $("#gramaje").val(response.GRAMMAGE_MINIMETERAGE);
-            $("#precio").val(response.PRICE);
+            if(response == null){
+                Swal.fire(
+                    'Ups',
+                    'No hay productos con ese embajale en el inventario',
+                    'warning'
+                )
+                $("#producto_salida").val("");
+                $("#marca").val("");
+                $("#gramaje").val("");
+                $("#embalaje").val("");
+                $("#precio").val("");
+            }else{
+                let col = document.getElementById("cargando");
+                col.innerHTML = "";
+                $("#producto_salida").val(response.NAME_PRODUCT);
+                $("#marca").val(response.BRAND);
+                $("#gramaje").val(response.GRAMMAGE_MINIMETERAGE);
+                $("#embalaje").val(response.PACKAGING);
+                $("#precio").val(response.PRICE);
+            }
         }
     })
     return false;
@@ -236,12 +252,12 @@ function productoSalidas(){
 function carrito(){
     let codigo = $("#cod_salida").val();
     let nombre = $("#producto_salida").val();
-    let marca = $("#marca").val();
     let gramaje = $("#gramaje").val();
     let cantidad = $("#cantidad").val();
+    let embalaje = $("#embalaje").val();
     let precio = $("#precio").val();
     let discount = $("#discount").val();
-    if(cantidad == ""){
+    if(cantidad == "" || discount == ""){
         Swal.fire({
             icon: "error",
             title: "Ups",
@@ -252,11 +268,11 @@ function carrito(){
     let array = {
         "cod": codigo,
         "nom": nombre,
-        "mar": marca,
         "gram": gramaje,
         "cant": cantidad,
         "pre": precio,
-        "dis": discount
+        "dis": discount,
+        "emb": embalaje
     }
     $.ajax({
         type: "POST",
@@ -400,13 +416,13 @@ function salidas(){
                             'success'
                         )
                         imprimir(response);
-                        // setTimeout(function(){
-                        //     location.reload();
-                        // }, 5000);
-                    }else{
                         setTimeout(function(){
                             location.reload();
-                        }, 2000);
+                        }, 5000);
+                    }else{
+                        // setTimeout(function(){
+                        //     location.reload();
+                        // }, 2000);
                     }
                   })
                 /*

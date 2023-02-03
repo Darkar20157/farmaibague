@@ -1,33 +1,33 @@
 <?php
 require_once "Conexiones.php";
+date_default_timezone_set("America/Bogota");
 //Insertar datos en la tabla entradas_inv
 if(isset($_POST['cod_entrada'])){
     try {
-        $fecha = $_POST["fecha_entradas"];
-        $fecha = date('Y-m-d H:i:s', strtotime($fecha));
+        $fecha = date("Y-m-d H:i:s");
         $cod = $_POST['cod_entrada'];
         $producto = $_POST["producto_entrada"];
-        $cantidad = $_POST["cantidad_entrada"];
-        $novedad = $_POST["novedades"];
-        // $categoria = $_POST["categoria"];
-        // $detProduc = $_POST['marca_producto'];
-        $proveedor = $_POST['proveedor_producto'];
         $precio = $_POST['precio'];
+        $cantidad = $_POST["cantidad_entrada"];
+        $packaging = $_POST['packaging'];
+        $novedad = $_POST["novedades"];
+        $proveedor = $_POST['proveedor_producto'];
+        $priceBuy = $_POST['priceBuy'];
         
-        $sql3 = "SELECT AMOUNT FROM INVENTARIO WHERE BARCODE = $cod";
+        $sql3 = "SELECT AMOUNT FROM INVENTARIO WHERE BARCODE = $cod AND PACKAGING = '$packaging'";
         $consult3 = mysqli_query($conexion, $sql3);
         $row = mysqli_fetch_assoc($consult3);
         if(empty($row['AMOUNT'])){
-            $sql3 = "INSERT INTO INVENTARIO (BARCODE, NAME_PRODUCT, AMOUNT, NIT_VENDOR, PRICE_UNID) VALUES($cod, '$producto', $cantidad, '$proveedor', $precio)";
-            //$consult3 = mysqli_query($conexion, $sql3);
+            $sql3 = "INSERT INTO INVENTARIO (BARCODE, NAME_PRODUCT, AMOUNT, NIT_VENDOR, PRICE, PACKAGING) VALUES($cod, '$producto', $cantidad, '$proveedor', $precio, '$packaging')";
+            $consult3 = mysqli_query($conexion, $sql3);
         }else{
             $amount = $row['AMOUNT'] + $cantidad;
-            $sql = "UPDATE INVENTARIO SET AMOUNT = $amount WHERE BARCODE = $cod";
+            $sql = "UPDATE INVENTARIO SET AMOUNT = $amount WHERE BARCODE = $cod AND PACKAGING = '$packaging'";
             $consult = mysqli_query($conexion, $sql);
         }
         try{
             $sql4 = mysqli_query($conexion,"INSERT INTO DETAIL_INVENTORY (BARCODE, NAME_PRODUCT, AMOUNT, NIT_VENDOR, DATE_CREATION,
-            PRICE_UNID, NOTES) VALUES($cod, '$producto', $cantidad, '$proveedor', '$fecha', $precio, '$novedad')");
+            PRICE_UNID, PACKAGING, PRICE_BUY, NOTES) VALUES($cod, '$producto', $cantidad, '$proveedor', '$fecha', $precio, '$packaging', $priceBuy, '$novedad')");
             
             if($sql4){
                 echo "Correcto";

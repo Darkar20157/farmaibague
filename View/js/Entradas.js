@@ -64,16 +64,16 @@ $(document).ready(function(){
 //Validar campos que no esten vacios
 function registrarEntrada(){
     document.getElementById("registrar").disabled = true;
-    let fecha = $("#fecha_entradas").val();
     let codEnt = $("#cod_entrada").val();
     let proEnt = $("#producto_entrada").val();
     let precio = $("#precio").val();
     let cantidad = $("#cantidad_entrada").val();
-    //let categoria = $("#categoria").val();
-    //let marPro = $("#marca_producto").val();
     let proPro = $("#proveedor_producto").val();
+    let packaging = $("#packaging").val();
+    let priceBuy = $("#priceBuy").val();
     let novedades = $("#novedades").val();
-    if(fecha == "" || codEnt == "" || proEnt == "" || precio == "" || cantidad == "" || proPro == "" || novedades == ""){
+    if(codEnt == "" || proEnt == "" || precio == "" || cantidad == "" 
+    || proPro == "" || packaging == "" || priceBuy == "" || novedades == ""){
         Swal.fire(
             "Oops",
             "Se han encontrado campos vacios",
@@ -83,13 +83,14 @@ function registrarEntrada(){
         return false;
     }else{
         let array = {
-            "fecha_entradas": fecha,
             "cod_entrada": codEnt,
             "producto_entrada": proEnt,
             "precio": precio,
             "cantidad_entrada": cantidad,
             "proveedor_producto": proPro,
-            "novedades": novedades
+            "novedades": novedades,
+            "packaging": packaging,
+            "priceBuy": priceBuy
         }
         enviarEntrada(array);
     }
