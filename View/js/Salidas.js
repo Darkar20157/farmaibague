@@ -230,6 +230,7 @@ function productoSalidas(){
                     'No hay productos con ese embajale en el inventario',
                     'warning'
                 )
+                $("#cod_salida").val("");
                 $("#producto_salida").val("");
                 $("#marca").val("");
                 $("#gramaje").val("");
@@ -261,7 +262,7 @@ function carrito(){
         Swal.fire({
             icon: "error",
             title: "Ups",
-            text: "Digita una cantidad al producto"
+            text: "Digita una cantidad al producto o elige un descuento"
         })
         return false;
     }
@@ -420,16 +421,11 @@ function salidas(){
                             location.reload();
                         }, 5000);
                     }else{
-                        // setTimeout(function(){
-                        //     location.reload();
-                        // }, 2000);
+                        setTimeout(function(){
+                            location.reload();
+                        }, 2000);
                     }
                   })
-                /*
-                setTimeout(function(){
-                    location.reload();
-                }, 2000);
-                */
             }else{
                 Swal.fire({
                     icon: "error",
