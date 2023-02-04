@@ -30,104 +30,65 @@ require "header.php";
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="col">
             <?php
             $sql = "SELECT 
-            INV.*,
-            VEN.NAME_VENDOR,
-            VEN.ADDRESS_VENDOR,
-            VEN.PHONE_VENDOR,
-            DA.GRAMMAGE_MINIMETERAGE,
-            DA.BRAND
-            FROM INVENTARIO INV
-            INNER JOIN DETAIL_ART DA ON INV.BARCODE = DA.BARCODE
-            INNER JOIN VENDORS VEN ON INV.NIT_VENDOR = VEN.NIT_VENDOR";
+            SL.DATE_VOUCHER,
+            DI.BARCODE, 
+            DI.NAME_PRODUCT, 
+            DI.PACKAGING, 
+            DI.AMOUNT, 
+            DI.PRICE_UNID, 
+            DI.PRICE_BUY,
+            (SL.PRICE_UNID * SL.AMOUNT) AS TOTAL_VENTA,
+            (SL.PRICE_UNID * SL.AMOUNT) - DI.PRICE_BUY AS TOTAL_GANADO
+            FROM DETAIL_INVENTORY DI
+            LEFT JOIN SALES SL
+            ON SL.BARCODE = DI.BARCODE";
             $consulta = mysqli_query($conexion, $sql);
             ?>
             <div class="table-responsive">
                 <table class="table table-hover" id="table2">
                     <thead>
                         <tr class="table-dark">
+                            <th>Fecha Venta</th>
                             <th>Codigo Producto</th>
                             <th>Nombre Producto</th>
-                            <th>Unidad/Medida</th>
-                            <th>Laboratorio</th>
-                            <th>Cant. Producto</th>
-                            <th>Price</th>
                             <th>Embalaje</th>
-                            <th>Nit Proveedor</th>
-                            <th>Nombre Proveedor</th>
-                            <th>Direccion Proveedor</th>
-                            <th>Celular Proveedor</th>
+                            <th>Precio Unid.</th>
+                            <th>Cantidad</th>
+                            <th>Precio Compra</th>
+                            <th>Total Venta</th>
+                            <th>Total Ganado</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                     while($row = mysqli_fetch_array($consulta)){
-                        if($row['AMOUNT'] <= 10){
-                            ?>
-                            <tr class="table-danger">
-                                <td><?php echo $row['BARCODE']; ?></td>
-                                <td><?php echo $row['NAME_PRODUCT']; ?></td>
-                                <td><?php echo $row['GRAMMAGE_MINIMETERAGE']; ?></td>
-                                <td><?php echo $row['BRAND']; ?></td>
-                                <td><?php echo $row['AMOUNT']; ?></td>
-                                <td><?php echo $row['PRICE']; ?></td>
-                                <td><?php echo $row['PACKAGING']; ?></td>
-                                <td><?php echo $row['NIT_VENDOR']; ?></td>
-                                <td><?php echo $row['NAME_VENDOR']; ?></td>
-                                <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
-                                <td><?php echo $row['PHONE_VENDOR']; ?></td>
-                            </tr>
-                        <?php
-                        }elseif($row['AMOUNT'] <= 30){
-                            ?>
-                            <tr class="table-warning">
-                                <td><?php echo $row['BARCODE']; ?></td>
-                                <td><?php echo $row['NAME_PRODUCT']; ?></td>
-                                <td><?php echo $row['GRAMMAGE_MINIMETERAGE']; ?></td>
-                                <td><?php echo $row['BRAND']; ?></td>
-                                <td><?php echo $row['AMOUNT']; ?></td>
-                                <td><?php echo $row['PRICE']; ?></td>
-                                <td><?php echo $row['PACKAGING']; ?></td>
-                                <td><?php echo $row['NIT_VENDOR']; ?></td>
-                                <td><?php echo $row['NAME_VENDOR']; ?></td>
-                                <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
-                                <td><?php echo $row['PHONE_VENDOR']; ?></td>
-                            </tr>
-                        <?php
-                        }elseif($row['AMOUNT'] > 100){
-                            ?>
-                            <tr class="table-success">
-                                <td><?php echo $row['BARCODE']; ?></td>
-                                <td><?php echo $row['NAME_PRODUCT']; ?></td>
-                                <td><?php echo $row['GRAMMAGE_MINIMETERAGE']; ?></td>
-                                <td><?php echo $row['BRAND']; ?></td>
-                                <td><?php echo $row['AMOUNT']; ?></td>
-                                <td><?php echo $row['PRICE']; ?></td>
-                                <td><?php echo $row['PACKAGING']; ?></td>
-                                <td><?php echo $row['NIT_VENDOR']; ?></td>
-                                <td><?php echo $row['NAME_VENDOR']; ?></td>
-                                <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
-                                <td><?php echo $row['PHONE_VENDOR']; ?></td>
-                            </tr>
+                        ?>
+                        <tr class="table-danger">
+                            <td><?php echo $row['DATE_VOUCHER']; ?></td>
+                            <td><?php echo $row['BARCODE']; ?></td>
+                            <td><?php echo $row['NAME_PRODUCT']; ?></td>
+                            <td><?php echo $row['PACKAGING']; ?></td>
+                            <td><?php echo $row['AMOUNT']; ?></td>
+                            <td><?php echo $row['PRICE_UNID']; ?></td>
+                            <td><?php echo $row['PRICE_BUY']; ?></td>
+                            <td><?php echo $row['TOTAL_VENTA']; ?></td>
+                            <td><?php echo $row['TOTAL_GANADO']; ?></td>
+                        </tr>
                         <?php
                         }
                         ?>
-                    <?php
-                    }
-                    ?>
                     </tbody>
                     <tfoot>
                         <tr class="footers">
+                            <th>Fecha Venta</th>
                             <th>Codigo Producto</th>
                             <th>Nombre Producto</th>
-                            <th>Unidad/Medida</th>
-                            <th>Laboratorio</th>
-                            <th>Cant. Producto</th>
-                            <th>Price</th>
                             <th>Embalaje</th>
-                            <th>Nit Proveedor</th>
-                            <th>Nombre Proveedor</th>
-                            <th>Direccion Proveedor</th>
-                            <th>Celular Proveedor</th>
+                            <th>Precio Unid.</th>
+                            <th>Cantidad</th>
+                            <th>Precio Compra</th>
+                            <th>Total Venta</th>
+                            <th>Total Ganado</th>
                         </tr>
                     </tfoot>
                 </table>
