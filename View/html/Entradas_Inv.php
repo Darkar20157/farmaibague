@@ -156,7 +156,7 @@ require "header.php";
                                 <td><?php echo $row['NOTES']; ?></td>
                             </tr>
                         <?php
-                        }elseif($row['AMOUNT'] <= 30){
+                        }elseif($row['AMOUNT'] <= 50){
                             ?>
                             <tr class="table-warning">
                                 <td><?php echo $row['BARCODE']; ?></td>
@@ -170,7 +170,7 @@ require "header.php";
                                 <td><?php echo $row['NOTES']; ?></td>
                             </tr>
                         <?php
-                        }elseif($row['AMOUNT'] > 100){
+                        }elseif($row['AMOUNT'] > 51){
                             ?>
                             <tr class="table-success">
                                 <td><?php echo $row['BARCODE']; ?></td>
@@ -268,7 +268,7 @@ require "header.php";
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
                             </tr>
                         <?php
-                        }elseif($row['AMOUNT'] <= 30){
+                        }elseif($row['AMOUNT'] <= 50){
                             ?>
                             <tr class="table-warning">
                                 <td><?php echo $row['BARCODE']; ?></td>
@@ -284,7 +284,7 @@ require "header.php";
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
                             </tr>
                         <?php
-                        }elseif($row['AMOUNT'] > 100){
+                        }elseif($row['AMOUNT'] > 51){
                             ?>
                             <tr class="table-success">
                                 <td><?php echo $row['BARCODE']; ?></td>
