@@ -125,6 +125,9 @@ require 'header.php';
                                     <option value="Caja">Caja</option>
                                     <option value="Unidad">Unidad</option>
                                     <option value="Blister">Blister</option>
+                                    <option value="Tarro">Tarro</option>
+                                    <option value="Frasco">Frasco</option>
+                                    <option value="Paquete">Paquete</option>
                                 </select>
                             </td>
                             <td>
@@ -132,7 +135,7 @@ require 'header.php';
                                     <option value="">Seleccione Codigo</option>
                                     <?php
                                     $sql = "SELECT * 
-                                    FROM INVENTARIO GROUP BY BARCODE";
+                                    FROM INVENTARIO WHERE AMOUNT > 0 GROUP BY BARCODE";
                                     $consul = mysqli_query($conexion,$sql);
                                     while($row = mysqli_fetch_assoc($consul)){
                                         $COD = $row['BARCODE'];

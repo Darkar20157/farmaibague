@@ -40,5 +40,16 @@ if(isset($_POST['cod_entrada'])){
     } catch (Throwable $th) {
         echo "Incorrecto ".$th;
     }
+}elseif(isset($_POST['id'])){
+    try{
+        $id = $_POST['id'];
+        $sql = "DELETE FROM DETAIL_INVENTORY WHERE ID = $id";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo "Incorrecto".$ex;
+    }
 }
 ?>

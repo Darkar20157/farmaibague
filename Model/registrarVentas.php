@@ -110,7 +110,8 @@ if(isset($_POST['ced'])){
                 $array2 = [];
                 for ($i=0; $i < count($array); $i++) { 
                     $barCode = $array[$i]['BARCODE'];
-                    $sql4 = "SELECT BARCODE, AMOUNT FROM INVENTARIO WHERE BARCODE = $barCode";
+                    $embalaje1 = $array[$i]['PACKAGING'];
+                    $sql4 = "SELECT BARCODE, AMOUNT FROM INVENTARIO WHERE BARCODE = $barCode AND PACKAGING = '$embalaje1'";
                     $consult4 = mysqli_query($conexion, $sql4);
                     $fila = mysqli_fetch_assoc($consult4);
                     $array2[$i] = ["BARCODE" => $fila['BARCODE'], "AMOUNT" => $fila['AMOUNT'] ];
@@ -121,15 +122,18 @@ if(isset($_POST['ced'])){
                         $resta = $array2[$i]['AMOUNT'] - $array[$i]['AMOUNT'];
                         $arrayResta[$i] = ["BARCODE" => $array2[$i]['BARCODE'], "AMOUNT" => $resta];
                     }
+
                     for ($i=0; $i < count($arrayResta); $i++) { 
                         $amountCurrent = $arrayResta[$i]['AMOUNT'];
                         $barCode = $array2[$i]['BARCODE'];
-                        $sql5 = "UPDATE INVENTARIO SET AMOUNT = $amountCurrent WHERE BARCODE = $barCode";
+                        $embalaje2 = $array[$i]['PACKAGING'];
+                        $sql5 = "UPDATE INVENTARIO SET AMOUNT = $amountCurrent WHERE BARCODE = $barCode AND PACKAGING = '$embalaje2'";
                         $consult5 = mysqli_query($conexion, $sql5);
                     }
                     if($consult5){
                         die($id);
                     }
+                    
                 }
             }
         }

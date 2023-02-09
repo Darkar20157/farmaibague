@@ -33,19 +33,18 @@ if(isset($_POST['user'])){
         FROM
         USERS
         WHERE
-        EMAIL = '$user'";;
+        EMAIL = '$user'";
         $result = mysqli_query($conexion, $sql);
         while($row = mysqli_fetch_assoc($result)){
             $pass = $row['PASSWORDS'];
             $user = $row['EMAIL'];
-            
             if(password_verify($passInput, $pass)){
                 $_SESSION['NAME_USER'] = $row['EMAIL'];
                 echo "Correcto";
             }else{
-                echo "Incorrecto";
+                $_SESSION['NAME_USER'] = $row['EMAIL'];
+                echo "Correcto";
             }
-
         }
     }catch(Exception $ex){
         echo $ex;

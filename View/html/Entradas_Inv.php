@@ -86,9 +86,12 @@ require "header.php";
             <h5>Embalaje (*)</h5>
             <select class="form-select" id="packaging" name="packaging" onchange="vendors()">
                 <option value="">Selecciona un opcion</option>
+                <option value="Caja">Caja</option>
                 <option value="Unidad">Unidad</option>
                 <option value="Blister">Blister</option>
-                <option value="Caja">Caja</option>
+                <option value="Tarro">Tarro</option>
+                <option value="Frasco">Frasco</option>
+                <option value="Paquete">Paquete</option>
             </select>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -137,6 +140,7 @@ require "header.php";
                             <th>Embalaje</th>
                             <th>Precio Compra</th>
                             <th>Novedades</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -154,6 +158,7 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] <= 50){
@@ -168,6 +173,7 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] > 51){
@@ -182,6 +188,7 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }

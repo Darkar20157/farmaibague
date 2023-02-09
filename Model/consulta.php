@@ -30,7 +30,8 @@ if(isset($_POST['cod'])){
     INNER JOIN DETAIL_ART DA 
     ON INV.BARCODE = DA.BARCODE
     WHERE INV.BARCODE = $cod
-    AND INV.PACKAGING = '$embalaje'";
+    AND INV.PACKAGING = '$embalaje'
+    AND INV.AMOUNT > 0";
     $consult = mysqli_query($conexion,$sql);
     $array = mysqli_fetch_assoc($consult);
     $JSON = json_encode($array);

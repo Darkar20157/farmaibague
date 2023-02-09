@@ -67,6 +67,7 @@ require 'header.php';
                 <option value="MG">Miligramos</option>
                 <option value="ML">Mililitros</option>
                 <option value="M3">Cm3</option>
+                <option value="M3">Paquete</option>
             </select>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -92,7 +93,7 @@ require 'header.php';
 <div class="container" id="contenedor" style="background-color: white; border-radius: 10px;">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-            <h3>Detalle Inventario</h3>
+            <h3>Detalle Productos</h3>
         </div>
     </div>
     <div class="row" id="row1">

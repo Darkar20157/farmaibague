@@ -156,6 +156,7 @@ function aggVendor(){
         url: "Model/costosAdicionales.php",
         data: array,
         success: function(response){
+            console.log(response);
             if(response == "Correcto"){
                 Swal.fire(
                     "Excelente!",

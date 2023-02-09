@@ -54,7 +54,7 @@ function ingresar(){
                 Swal.fire({
                     icon: "error",
                     title: "Oops",
-                    text: "El usuario y contraseña es incorrecto"+response,
+                    text: "El usuario y contraseña es incorrecto: "+response,
                 })
                 return false;
             }

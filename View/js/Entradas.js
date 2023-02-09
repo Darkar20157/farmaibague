@@ -159,6 +159,40 @@ function vendors(){
         }
     })
 }
+function eliminar(id){
+    let array = {
+        "id": id
+    }
+    Swal.fire({
+        title: 'Estas seguro de eliminar?',
+        text: "Eliminadaras este producto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "Model/registrarEntradas.php",
+                data: array,
+                success: function(response){
+                    if(response == "Correcto"){
+                        Swal.fire(
+                            'Eliminado!',
+                            'Este registro ha sido eliminado.',
+                            'success'
+                        )
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 2000)
+                    }
+                }
+            })
+        }
+      })
+}
 
 //Dinamismo en la pagina
 document.getElementById("selector1").style.cursor = "pointer";

@@ -417,13 +417,17 @@ function salidas(){
                             'success'
                         )
                         imprimir(response);
+                        
                         setTimeout(function(){
                             location.reload();
                         }, 5000);
+                        
                     }else{
+                        
                         setTimeout(function(){
                             location.reload();
                         }, 2000);
+                        
                     }
                   })
             }else{

@@ -90,7 +90,6 @@ try{
 		$printer->text("Producto: ".$array[$j]['NAME_PRODUCT']."\n");
 		$printer->text("Precio Unid.: $".number_format($array[$j]["PRICE_UNID"],0,',','.')."\n");
 		$printer->text("Descuento: ".$array[$j]['DISCOUNT_PRICE']."% "."\n");
-		$descuento = ($array[$j]["TOTAL_REGISTER"] * $array[$j]['DISCOUNT_PRICE']) * 100;
 		$printer->text("Subtotal: $".number_format($array[$j]["TOTAL_REGISTER"] - $descuento,0,',','.')."\n");
 		$printer->text("============================="."\n");
 		$i = $i + 1;
@@ -107,7 +106,6 @@ try{
 	$printer->text("================================"."\n");
 	$printer->setJustification(Printer::JUSTIFY_RIGHT);
 	$printer->text("==========TOTALES==============="."\n");
-	$printer->text("Subtotal Factura: $".number_format($array[0]["TOTAL_VOUCHER"],0,',','.')."\n");
 	$printer->text("Total Factura: $".number_format($array[0]["TOTAL_VOUCHER"],0,',','.')."\n");
 	$printer->text("Pago: $".number_format($array[0]['PAY_CLIENT'],0,',','.')."\n");
 	$printer->text("Cambio: $".number_format($array[0]['EXCHANGE'],0,',','.')."\n");

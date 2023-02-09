@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="View/css/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-colvis-2.1.1/b-html5-2.1.1/b-print-2.1.1/datatables.min.css"/>
-    <title>Ventas</title>
+    <title>Configuracion</title>
 </head>
 <body>
 <?php
@@ -240,6 +240,11 @@ require 'header.php';
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h3>Proveedores</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="table-responsive">
                 <table class="table table-hover" id="table">
                     <thead>
@@ -265,7 +270,7 @@ require 'header.php';
                                 <td><?php echo $row['NAME_VENDOR'] ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR'] ?></td>
                                 <td><?php echo $row['PHONE_VENDOR'] ?></td>
-                                <td><button class="btn btn-danger" onclick="eliminar('PAYMENT_METHOD', <?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <td><button class="btn btn-danger" onclick="eliminar('VENDORS', <?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }

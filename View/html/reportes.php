@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="View/css/navbar.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <title>Inventario</title>
+    <title>Reportes</title>
 </head>
 <body style="background-color: whitesmoke;">
 <?php
@@ -52,8 +52,8 @@ require "header.php";
                             <th>Codigo Producto</th>
                             <th>Nombre Producto</th>
                             <th>Embalaje</th>
-                            <th>Precio Unid.</th>
                             <th>Cantidad</th>
+                            <th>Precio Unid.</th>
                             <th>Precio Compra</th>
                             <th>Total Venta</th>
                             <th>Total Ganado</th>
@@ -84,8 +84,8 @@ require "header.php";
                             <th>Codigo Producto</th>
                             <th>Nombre Producto</th>
                             <th>Embalaje</th>
-                            <th>Precio Unid.</th>
                             <th>Cantidad</th>
+                            <th>Precio Unid.</th>
                             <th>Precio Compra</th>
                             <th>Total Venta</th>
                             <th>Total Ganado</th>
