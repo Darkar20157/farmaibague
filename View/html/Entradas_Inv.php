@@ -140,6 +140,7 @@ require "header.php";
                             <th>Embalaje</th>
                             <th>Precio Compra</th>
                             <th>Novedades</th>
+                            <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
@@ -158,6 +159,13 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NAME_PRODUCT'] ?>',
+                                                                                                                                         '<?php echo $row['AMOUNT'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE_UNID'] ?>',
+                                                                                                                                         '<?php echo $row['PACKAGING'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE_BUY'] ?>',
+                                                                                                                                         '<?php echo $row['NOTES'] ?>')">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
@@ -173,6 +181,13 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NAME_PRODUCT']?>',
+                                                                                                                                         '<?php echo $row['AMOUNT']?>',
+                                                                                                                                         '<?php echo $row['PRICE_UNID']?>',
+                                                                                                                                         '<?php echo $row['PACKAGING']?>',
+                                                                                                                                         '<?php echo $row['PRICE_BUY']?>',
+                                                                                                                                         '<?php echo $row['NOTES'] ?>')">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
@@ -188,6 +203,13 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NAME_PRODUCT'] ?>',
+                                                                                                                                         '<?php echo $row['AMOUNT'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE_UNID'] ?>',
+                                                                                                                                         '<?php echo $row['PACKAGING'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE_BUY'] ?>',
+                                                                                                                                         '<?php echo $row['NOTES'] ?>')">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
@@ -248,12 +270,14 @@ require "header.php";
                             <th>Unidad/Medida</th>
                             <th>Laboratorio</th>
                             <th>Cant. Producto</th>
-                            <th>Price</th>
+                            <th>Precio</th>
                             <th>Embalaje</th>
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Celular Proveedor</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -273,6 +297,16 @@ require "header.php";
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarInv(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NAME_PRODUCT'] ?>',
+                                                                                                                                         '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>',
+                                                                                                                                         '<?php echo $row['BRAND'] ?>',
+                                                                                                                                         '<?php echo $row['AMOUNT'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE'] ?>',
+                                                                                                                                         '<?php echo $row['PACKAGING'] ?>',
+                                                                                                                                         '<?php echo $row['NIT_VENDOR'] ?>',
+                                                                                                                                         )">Editar</button></td>
+                                <td><button class="btn btn-danger" onclick="eliminarInv(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] <= 50){
@@ -289,6 +323,16 @@ require "header.php";
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarInv(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NAME_PRODUCT'] ?>',
+                                                                                                                                         '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>',
+                                                                                                                                         '<?php echo $row['BRAND'] ?>',
+                                                                                                                                         '<?php echo $row['AMOUNT'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE'] ?>',
+                                                                                                                                         '<?php echo $row['PACKAGING'] ?>',
+                                                                                                                                         '<?php echo $row['NIT_VENDOR'] ?>',
+                                                                                                                                         )">Editar</button></td>
+                                <td><button class="btn btn-danger" onclick="eliminarInv(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] > 51){
@@ -305,6 +349,16 @@ require "header.php";
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarInv(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NAME_PRODUCT'] ?>',
+                                                                                                                                         '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>',
+                                                                                                                                         '<?php echo $row['BRAND'] ?>',
+                                                                                                                                         '<?php echo $row['AMOUNT'] ?>',
+                                                                                                                                         '<?php echo $row['PRICE'] ?>',
+                                                                                                                                         '<?php echo $row['PACKAGING'] ?>',
+                                                                                                                                         '<?php echo $row['NIT_VENDOR'] ?>',
+                                                                                                                                         )">Editar</button></td>
+                                <td><button class="btn btn-danger" onclick="eliminarInv(<?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }
@@ -320,12 +374,14 @@ require "header.php";
                             <th>Unidad/Medida</th>
                             <th>Laboratorio</th>
                             <th>Cant. Producto</th>
-                            <th>Price</th>
+                            <th>Precio</th>
                             <th>Embalaje</th>
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Celular Proveedor</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -335,6 +391,96 @@ require "header.php";
             <br>
         </div>
     </div>
+</div>
+
+<!-- Modal Detalle Inventario -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Editar Producto</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-4">
+                <h5>Nombre Producto</h5>
+                <input class="form-control" type="text" id="nom" name="nom">
+            </div>
+            <div class="col-4">
+                <h5>Cantidad</h5>
+                <input class="form-control" type="number" id="cant" name="cant">
+            </div>
+            <div class="col-4">
+                <h5>Precio</h5>
+                <input class="form-control" type="number" id="pric" name="pric">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4">
+                <h5>Embalaje</h5>
+                <input class="form-control" type="text" id="emb" name="emb">
+            </div>
+            <div class="col-4">
+                <h5>Precio Compra</h5>
+                <input class="form-control" type="number" id="preC" name="preC">
+            </div>
+            <div class="col-4">
+                <h5>Novedades</h5>
+                <input class="form-control" type="text" id="nov" name="nov">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="editar(0)">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Inventario -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Editar Inventario</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-4">
+                <h5>Nombre Producto</h5>
+                <input class="form-control" type="text" id="nompInv" name="nompInv">
+            </div>
+            <div class="col-4">
+                <h5>Cant. Producto</h5>
+                <input class="form-control" type="number" id="cantInv" name="cantInv">
+            </div>
+            <div class="col-4">
+                <h5>Nit. Proveedor</h5>
+                <input class="form-control" type="text" id="nit" name="nit">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4">
+                <h5>Precio</h5>
+                <input class="form-control" type="number" id="precInv" name="precInv">
+            </div>
+            <div class="col-4">
+                <h5>Embalaje</h5>
+                <input class="form-control" type="text" id="embInv" name="embInv">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="editarInv(0)">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Jquery  -->
 <script src="View/js/jquery-3.6.0.js"></script>

@@ -159,9 +159,120 @@ function vendors(){
         }
     })
 }
+function editar(id, name, cant, price, emb, priceBuy, notes){
+    if(!id == 0){
+        localStorage.setItem("idInv", id);
+        $("#nom").val(name)
+        $("#cant").val(cant)
+        $("#pric").val(price)
+        $("#emb").val(emb)
+        $("#preC").val(priceBuy)
+        $("#nov").val(notes)
+        return false;
+    }
+    let array = {
+        "idEdit": localStorage.getItem("idInv"),
+        "nom": $("#nom").val(),
+        "cant": $("#cant").val(),
+        "pric": $("#pric").val(),
+        "emb": $("#emb").val(),
+        "preC": $("#preC").val(),
+        "nov": $("#nov").val(),
+    }
+    $.ajax({
+        type: "POST",
+        url: "Model/registrarEntradas.php",
+        data: array,
+        success: function(response){
+            if(response == "Correcto"){
+                Swal.fire(
+                    'Editado!!',
+                    'Se ha editado el producto correctamente',
+                    'success'
+                )
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000)
+            }
+            
+        }
+    })
+}
 function eliminar(id){
     let array = {
         "id": id
+    }
+    Swal.fire({
+        title: 'Estas seguro de eliminar?',
+        text: "Eliminadaras este producto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "Model/registrarEntradas.php",
+                data: array,
+                success: function(response){
+                    if(response == "Correcto"){
+                        Swal.fire(
+                            'Eliminado!',
+                            'Este registro ha sido eliminado.',
+                            'success'
+                        )
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 2000)
+                    }
+                }
+            })
+        }
+      })
+}
+function editarInv(id, name, gram, brand, cant, price, emb, nit){
+    if(!id == 0){
+        localStorage.setItem("idInv", id);
+        $("#nompInv").val(name)
+        $("#cantInv").val(cant)
+        $("#precInv").val(price)
+        $("#embInv").val(emb)
+        $("#nit").val(nit)
+        return false;
+    }
+    let array = {
+        "idEditInv": localStorage.getItem("idInv"),
+        "nom": $("#nompInv").val(),
+        "cant": $("#cantInv").val(),
+        "pre": $("#precInv").val(),
+        "emb": $("#embInv").val(),
+        "nit": $("#nit").val(),
+    }
+    $.ajax({
+        type: "POST",
+        url: "Model/registrarEntradas.php",
+        data: array,
+        success: function(response){
+            if(response == "Correcto"){
+                Swal.fire(
+                    'Editado!!',
+                    'Se ha editado el producto correctamente',
+                    'success'
+                )
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000)
+            }
+            
+        }
+    })
+}
+
+function eliminarInv(id){
+    let array = {
+        "idInv": id
     }
     Swal.fire({
         title: 'Estas seguro de eliminar?',

@@ -51,5 +51,49 @@ if(isset($_POST['cod_entrada'])){
     }catch(Exception $ex){
         echo "Incorrecto".$ex;
     }
+}elseif(isset($_POST['idEdit'])){
+    try{
+        $id = $_POST['idEdit'];
+        $nom = $_POST['nom'];
+        $cant = $_POST['cant'];
+        $pric = $_POST['pric'];
+        $emb = $_POST['emb'];
+        $preC = $_POST['preC'];
+        $nov = $_POST['nov'];
+        $sql = "UPDATE DETAIL_INVENTORY SET NAME_PRODUCT = '$nom', AMOUNT = $cant, PRICE_UNID = $pric, PACKAGING = '$emb', PRICE_BUY = $preC, NOTES = '$nov' WHERE ID = $id";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo "Incorrecto";
+    }
+}elseif(isset($_POST['idEditInv'])){
+    try{
+        $id = $_POST['idEditInv'];
+        $nom = $_POST['nom'];
+        $cant = $_POST['cant'];
+        $pre = $_POST['pre'];
+        $emb = $_POST['emb'];
+        $nit = $_POST['nit'];
+        $sql = "UPDATE INVENTARIO SET NAME_PRODUCT = '$nom', AMOUNT = $cant, NIT_VENDOR = '$nit', PRICE = $pre, PACKAGING = '$emb' WHERE ID = $id";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo "Incorrecto";
+    }
+}elseif(isset($_POST['idInv'])){
+    try{
+        $id = $_POST['idInv'];
+        $sql = "DELETE FROM INVENTARIO WHERE ID = $id";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo "Incorrecto".$ex;
+    }
 }
 ?>
