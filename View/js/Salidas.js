@@ -342,8 +342,9 @@ function verTotal(){
         dataType: 'json',
         data: array,
         success: function(response){
+            console.log(response)
             let subtotal = response.subtotal;
-            let total = response.total - costAdi;
+            let total = response.total;
             $("#subtotal").val(subtotal);
             $("#total").val(total);
         }
