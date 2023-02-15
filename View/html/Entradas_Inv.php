@@ -86,12 +86,15 @@ require "header.php";
             <h5>Presentación (*)</h5>
             <select class="form-select" id="packaging" name="packaging" onchange="vendors()">
                 <option value="">Selecciona un opcion</option>
-                <option value="Caja">Caja</option>
-                <option value="Unidad">Unidad</option>
-                <option value="Blister">Blister</option>
-                <option value="Tarro">Tarro</option>
-                <option value="Frasco">Frasco</option>
-                <option value="Paquete">Paquete</option>
+                <?php
+                $sql = "SELECT * FROM PRESENTACION";
+                $consult = mysqli_query($conexion, $sql);
+                while($row = mysqli_fetch_assoc($consult)){
+                ?>
+                <option value="<?php echo $row['PRESENTACION'] ?>"><?php echo $row['PRESENTACION'] ?></option>
+                <?php
+                }
+                ?>
             </select>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -136,7 +139,7 @@ require "header.php";
                             <th>Cant. Producto</th>
                             <th>Nit Proveedor</th>
                             <th>Fecha Ingreso</th>
-                            <th>Price</th>
+                            <th>Precio</th>
                             <th>Embalaje</th>
                             <th>Precio Compra</th>
                             <th>Novedades</th>

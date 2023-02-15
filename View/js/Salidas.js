@@ -353,7 +353,7 @@ function verTotal(){
 //Registrar una salida
 function salidas(){
     let ced = $("#cedula_cliente").val();
-    let pago = parseInt($("#pago").val());
+    let pago = $("#pago").val();
     let costAdi = $("#costAdi").val();
     let methodPay = $("#methodPay").val();
     if(ced == ""){
@@ -365,7 +365,7 @@ function salidas(){
         document.getElementById("registrar").disabled = false;
         return false;
     }
-    if(pago == ""){
+    if(pago == "" || pago == NaN){
         Swal.fire({
             icon: 'error',
             title: 'Oops',
@@ -374,6 +374,7 @@ function salidas(){
         document.getElementById("registrar").disabled = false;
         return false;
     }
+    pago = parseInt(pago);
     let total = parseInt($("#total").val());
     if(pago < total){
         Swal.fire({
@@ -409,7 +410,7 @@ function salidas(){
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Si, Imprimir!'
                   }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire(
