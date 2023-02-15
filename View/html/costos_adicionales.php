@@ -88,34 +88,47 @@ require 'header.php';
     <br>
     <div class="row">
         <!-- Consulta para buscar la persona quien recibe el inventario -->
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h5 id="cargando1">Agregar Metodo de Pago</h5>
             <input class="form-control" type="text" id="method" name="method">
             <br>
             <button class="btn btn-primary" onclick="aggMethod()">Agregar Metodo de Pago</button>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h5 id="cargando1">Agregar Presentación</h5>
+            <input class="form-control" type="text" id="presentation" name="presentation">
+            <br>
+            <button class="btn btn-primary" onclick="aggPresentation()">Agregar Presentación</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h5 id="cargando1">Agregar Costo Adicional</h5>
             <input class="form-control" type="text" id="cost" name="cost">
             <br>
-            <button class="btn btn-primary" onclick="aggCost()">Agregar Costo Adicional</button>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h5 id="cargando1">Valor Costo Adicional</h5>
             <input class="form-control" type="number" id="value" name="value">
             <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <button class="btn btn-primary" onclick="aggCost()">Agregar Costo Adicional</button>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <h3>Descuentos, Costos Adicionales y Metodos de Pago</h3>
+            <h3>Descuentos, Costos Adicionales, Metodos de Pago y Presentaciones</h3>
         </div>
     </div>
     <!-- Agregar productos al carrito -->
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5" id="carrito">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" id="carrito">
             <div class="table-responsive">
                 <table class="table table-hover" id="table">
                     <thead>
@@ -156,7 +169,7 @@ require 'header.php';
                 </table>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" id="carrito">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" id="carrito">
             <div class="table-responsive">
                 <table class="table table-hover" id="table">
                     <thead>
@@ -197,7 +210,10 @@ require 'header.php';
                 </table>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" id="carrito">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="table-responsive">
                 <table class="table table-hover" id="table">
                     <thead>
@@ -229,6 +245,44 @@ require 'header.php';
                         <tr class="footers">
                             <th>Id</th>
                             <th>Metodo de Pago</th>
+                            <th>Accion</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="table-responsive">
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Id</th>
+                            <th>Nombre Presentación</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * 
+                        FROM PRESENTACION";
+                        $consult = mysqli_query($conexion, $sql);
+                    ?>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_assoc($consult)){
+                        ?>
+                            <tr>
+                                <td><?php echo $row['ID'] ?></td>
+                                <td><?php echo $row['PRESENTACION'] ?></td>
+                                <td><button class="btn btn-danger" onclick="eliminar('PRESENTACION', <?php echo $row['ID'] ?>)">Eliminar</button></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr class="footers">
+                            <th>Id</th>
+                            <th>Nombre Presentación</th>
                             <th>Accion</th>
                         </tr>
                     </tfoot>

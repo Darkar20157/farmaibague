@@ -177,3 +177,43 @@ function aggVendor(){
         }
     })
 }
+
+function aggPresentation(){
+    let presentation = document.getElementById("presentation").value;
+    if(presentation == ""){
+        Swal.fire(
+            "Ups!",
+            "Hay campos vacios para crear la presentacion",
+            "error"
+        )
+        return false;
+    }
+    let array = {
+        "pre": presentation
+    }
+    $.ajax({
+        type: "POST",
+        url: "Model/costosAdicionales.php",
+        data: array,
+        success: function(response){
+            console.log(response);
+            if(response == "Correcto"){
+                Swal.fire(
+                    "Excelente!",
+                    "Se ha eliminado correctamente",
+                    "success"
+                )
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000);
+            }else{
+                Swal.fire(
+                    "Ups!",
+                    "Ha ocurrido un error "+response,
+                    "error"
+                )
+                return false;
+            }
+        }
+    })
+}

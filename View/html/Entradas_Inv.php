@@ -83,7 +83,7 @@ require "header.php";
             </select>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <h5>Embalaje (*)</h5>
+            <h5>Presentación (*)</h5>
             <select class="form-select" id="packaging" name="packaging" onchange="vendors()">
                 <option value="">Selecciona un opcion</option>
                 <option value="Caja">Caja</option>

@@ -106,7 +106,7 @@ require 'header.php';
                 <table class="table table-hover" id="table">
                     <thead>
                         <tr class="table-dark">
-                            <th>Embalaje</th>
+                            <th>Presentación</th>
                             <th>Agregar Producto</th>
                             <th>Producto</th>
                             <th>Unid/Medida</th>
@@ -273,7 +273,7 @@ require 'header.php';
                     <tbody>
                         <?php
                         $sql2 = "SELECT 
-                        NRO_FACTURA, 
+                        SL.NRO_FACTURA,
                         SL.CED_NRO,
                         CL.NAMES,
                         CL.ADDRES,
@@ -299,7 +299,8 @@ require 'header.php';
                         INNER JOIN DETAIL_ART BR ON SL.BARCODE = BR.BARCODE
                         INNER JOIN COST_ADDITIONAL CA ON SL.COST_ADDITIONAL_ID = CA.ID
                         INNER JOIN PAYMENT_METHOD PM ON SL.PAYMENT_METHOD_ID = PM.ID
-                        INNER JOIN DISCOUNTS DS ON SL.DISCOUNT_ID = DS.ID";
+                        INNER JOIN DISCOUNTS DS ON SL.DISCOUNT_ID = DS.ID
+                        GROUP BY SL.NRO_FACTURA";
                         $consult2 = mysqli_query($conexion, $sql2);
                         while($rows2 = mysqli_fetch_assoc($consult2)){
                         ?>

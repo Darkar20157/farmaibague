@@ -61,5 +61,16 @@ if(isset($_POST['cost'])){
     }catch(Exception $ex){
         echo $ex;
     }
+}elseif(isset($_POST['pre'])){
+    try{
+        $presentacion = $_POST['pre'];
+        $sql = "INSERT INTO PRESENTACION (PRESENTACION) VALUES('$presentacion')";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo $ex;
+    }
 }
 ?>
