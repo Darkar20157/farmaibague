@@ -24,7 +24,11 @@ $mesM = ucfirst($mes);
 <br>
 <div class="container">
     <div class="row">
-        
+        <div class="col-12">
+            <div style="display: flex; justify-content: center">
+                <img src="View/img/redondo.jpeg" style="width: 50%">
+            </div>
+        </div>
     </div>
 </div>
 <br> 

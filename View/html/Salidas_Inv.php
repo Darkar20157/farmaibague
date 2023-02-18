@@ -303,7 +303,8 @@ require 'header.php';
                         INNER JOIN COST_ADDITIONAL CA ON SL.COST_ADDITIONAL_ID = CA.ID
                         INNER JOIN PAYMENT_METHOD PM ON SL.PAYMENT_METHOD_ID = PM.ID
                         INNER JOIN DISCOUNTS DS ON SL.DISCOUNT_ID = DS.ID
-                        GROUP BY SL.NRO_FACTURA";
+                        GROUP BY SL.NRO_FACTURA
+                        ORDER BY SL.ID ASC";
                         $consult2 = mysqli_query($conexion, $sql2);
                         while($rows2 = mysqli_fetch_assoc($consult2)){
                         ?>

@@ -24,9 +24,9 @@
   animation: Loader 1.5s infinite ease-out;
 }
 .loader{
-  right: 7%;
-  top: 2%;
-  color: #E72B46;
+  right: 15%;
+  top: 5%;
+  color: #88AA6C;
   font-size: 13px;
   position: relative;
   animation-delay:  -0.15s;

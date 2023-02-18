@@ -72,5 +72,23 @@ if(isset($_POST['cost'])){
     }catch(Exception $ex){
         echo $ex;
     }
+}elseif(isset($_POST['table'])){
+    try{
+        $id = $_POST['id'];
+        $type = $_POST['table'];
+        $name = $_POST['names'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        $gender = $_POST['gender'];
+        $sql = "UPDATE $type SET NAMES = '$name', EMAIL = '$email', ADDRES = '$address', PHONE = '$phone', GENDER = '$gender'
+        WHERE CED_NRO = $id";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo $ex;
+    }
 }
 ?>

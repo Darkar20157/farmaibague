@@ -30,7 +30,7 @@ if(isset($_POST['cod'])){
                 <td><?php echo $row2['PACKAGING']; ?></td>
                 <td><?php echo $row2['PRICE']; ?></td>
                 <td><?php echo $row2['DISCOUNT_ID']; ?></td>
-                <td><button class="btn btn-outline-danger" id="<?php echo $row2['BARCODE'] ?>" onclick="eliminarUnidad(<?php echo $row2['BARCODE'] ?>)">X</button></td>
+                <td><button class="btn btn-outline-danger" id="<?php echo $row2['BARCODE'] ?>" onclick="eliminarUnidad(<?php echo $row2['BARCODE'] ?>, '<?php echo $row2['PACKAGING'] ?>')">X</button></td>
             </tr>
             <?php
         }
@@ -48,8 +48,8 @@ if(isset($_POST['cod'])){
     //Eliminamos una sola unidad de la tabla detalle
 }elseif(isset($_POST['borrarUnidad'])){
     $cod = $_POST['borrarUnidad'];
-    $cedula = $_POST['cedula'];
-    $sql = "DELETE FROM DETAIL_PRODUCT WHERE BARCODE = $cod";
+    $embalaje = $_POST['embalaje'];
+    $sql = "DELETE FROM DETAIL_PRODUCT WHERE BARCODE = $cod AND PACKAGING = '$embalaje'";
     $consult = mysqli_query($conexion, $sql);
     $sql2 = "SELECT * FROM DETAIL_PRODUCT";
     $consult2 = mysqli_query($conexion, $sql2);
@@ -58,11 +58,12 @@ if(isset($_POST['cod'])){
         <tr>
             <td><?php echo $row2['BARCODE']; ?></td>
             <td><?php echo $row2['NAME_PRODUCT']; ?></td>
-            <td><?php echo $row2['BRAND']; ?></td>
             <td><?php echo $row2['GRAMMAGE_MINIMETERAGE']; ?></td>
             <td><?php echo $row2['AMOUNT']; ?></td>
+            <td><?php echo $row2['PACKAGING']; ?></td>
             <td><?php echo $row2['PRICE']; ?></td>
-            <td><button class="btn btn-outline-danger" id="<?php echo $row2['BARCODE'] ?>" onclick="eliminarUnidad(<?php echo $row2['BARCODE'] ?>)">X</button></td>
+            <td><?php echo $row2['DISCOUNT_ID']; ?></td>
+            <td><button class="btn btn-outline-danger" id="<?php echo $row2['BARCODE'] ?>" onclick="eliminarUnidad(<?php echo $row2['BARCODE'] ?>, '<?php echo $row2['PACKAGING'] ?>')">X</button></td>
         </tr>
     <?php
     }

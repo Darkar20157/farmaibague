@@ -102,6 +102,52 @@ function aggMethod(){
     })
 }
 
+function editar(type, id, name, email, address, phone, gender){
+    if(!id == 0){
+        localStorage.setItem("client", id);
+        localStorage.setItem("table", type);
+        $("#name").val(name)
+        $("#email").val(email)
+        $("#addres").val(address)
+        $("#cel").val(phone)
+        $("#gen").val(gender)
+        return false;
+    }
+    let array = {
+        "table": localStorage.getItem("table"),
+        "id": localStorage.getItem("client"),
+        "names": $("#name").val(),
+        "email": $("#email").val(),
+        "address": $("#addres").val(),
+        "phone": $("#cel").val(),
+        "gender": $("#gen").val()
+    }
+    $.ajax({
+        type: "POST",
+        url: "Model/costosAdicionales.php",
+        data: array,
+        success: function(response){
+            if(response == "Correcto"){
+                Swal.fire(
+                    "Excelente!",
+                    "Se ha editado correctamente",
+                    "success"
+                )
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000);
+            }else{
+                Swal.fire(
+                    "Ups!",
+                    "Ha ocurrido un error "+response,
+                    "error"
+                )
+                return false;
+            }
+        }
+    })
+}
+
 function eliminar(type, id){
     let array = {
         "type": type,

@@ -1,6 +1,6 @@
 <!-- Loading -->
 <div class="contenedor-loader">
-    <img src="View/img/farmaibague.png" width="80"> <h2> FarmaIbague</h2>
+    <img src="View/img/largo.jpeg" style="width: 27%; border-radius: 15px">
     <div class="loader">
     </div>
 </div>
@@ -31,7 +31,7 @@ if($TP == 1){
 <header>
     <nav class="nav">
         <div class="nav-left">
-            <label for="btn-menu" id="btn"><img class="sub-menu" src="https://img.icons8.com/material-outlined/25/000000/menu--v1.png"/></label> <img src="View/img/farmaibague.png"><a class="dashboard" href=""> FarmaIbague </a>
+            <label for="btn-menu" id="btn"><img class="sub-menu" src="https://img.icons8.com/material-outlined/25/000000/menu--v1.png"/></label> <img src="View/img/largo.jpeg" style="width: 80%; height: 45px; border-radius: 15px">
         </div>
         <ul class="menu">
             <li class="iconos-menu1"><a href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/dashboard.php"); ?>">Inicio</a></li>

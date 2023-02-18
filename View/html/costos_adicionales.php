@@ -294,6 +294,80 @@ require 'header.php';
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h3>Clientes</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="table-responsive">
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Nombres</th>
+                            <th>Email</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Genero</th>
+                            <th>Editar</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * 
+                        FROM CLIENTS";
+                        $consult = mysqli_query($conexion, $sql);
+                    ?>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_assoc($consult)){
+                        ?>
+                            <tr>
+                                <td><?php echo $row['NAMES'] ?></td>
+                                <?php if(empty($row['EMAIL'])){    
+                                ?> 
+                                <td><?php echo "SIN CORREO"; ?></td> 
+                                <?php 
+                                }else{ 
+                                ?>
+                                <td><?php echo $row['EMAIL']; ?></td>
+                                <?php
+                                    } 
+                                ?>
+                                <td><?php echo $row['ADDRES'] ?></td>
+                                <td><?php echo $row['PHONE'] ?></td>
+                                <td><?php echo $row['GENDER'] ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar('CLIENTS', <?php echo $row['CED_NRO'] ?>, 
+                                                                                                                                                    '<?php echo $row['NAMES'] ?>',
+                                                                                                                                                    '<?php echo $row['EMAIL'] ?>',
+                                                                                                                                                    '<?php echo $row['ADDRES'] ?>',
+                                                                                                                                                    '<?php echo $row['PHONE'] ?>',
+                                                                                                                                                    '<?php echo $row['GENDER'] ?>')">Editar</button></td>
+                                <td><button class="btn btn-danger" onclick="eliminar('CLIENTS', <?php echo $row['ID'] ?>)">Eliminar</button></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr class="footers">
+                            <th>Nombres</th>
+                            <th>Email</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Genero</th>
+                            <th>Editar</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <h3>Proveedores</h3>
         </div>
     </div>
@@ -344,7 +418,47 @@ require 'header.php';
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Editar Cliente</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-4">
+                <h5>Nombre Cliente</h5>
+                <input class="form-control" type="text" id="name" name="name">
+            </div>
+            <div class="col-4">
+                <h5>Email</h5>
+                <input class="form-control" type="text" id="email" name="email">
+            </div>
+            <div class="col-4">
+                <h5>Direccion</h5>
+                <input class="form-control" type="text" id="addres" name="addres">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4">
+                <h5>Celular</h5>
+                <input class="form-control" type="number" id="cel" name="cel">
+            </div>
+            <div class="col-4">
+                <h5>Genero</h5>
+                <input class="form-control" type="text" id="gen" name="gen">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="editar(0)">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
 <br>
 <!-- Jquery  -->
 <script src="View/js/jquery-3.6.0.js"></script>

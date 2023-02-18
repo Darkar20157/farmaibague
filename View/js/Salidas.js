@@ -302,20 +302,21 @@ function vaciarCarrito(){
 }
 
 //Eliminar una elemento del carrito
-function eliminarUnidad(id){
+function eliminarUnidad(id, embajale){
     let cod = id;
-    let cedula = document.getElementById("cedula").value;
     let array = {
         "borrarUnidad": cod,
-        "cedula": cedula
+        "embalaje": embajale
     }
     document.getElementById("fila").innerHTML = "<div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div>";
+    console.log(array);
     $.ajax({
         type: "POST",
         url: "Model/carrito.php",
         data: array,
         success: function(response){
             document.getElementById("fila").innerHTML = response;
+            return false;
         }
     })
 }
