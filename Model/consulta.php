@@ -24,10 +24,15 @@ if(isset($_POST['cod'])){
 }elseif(isset($_POST['barcode'])){
     $cod = $_POST['barcode'];
     $embalaje = $_POST['embalaje'];
-    $sql = "SELECT * 
+    $sql = "SELECT
+	INV.NAME_PRODUCT,
+    DA.GRAMMAGE_MINIMETERAGE,
+    INV.AMOUNT,
+    INV.PRICE,
+    INV.PACKAGING
     FROM 
     INVENTARIO INV 
-    INNER JOIN DETAIL_ART DA 
+    INNER JOIN DETAIL_ART DA
     ON INV.BARCODE = DA.BARCODE
     WHERE INV.BARCODE = $cod
     AND INV.PACKAGING = '$embalaje'

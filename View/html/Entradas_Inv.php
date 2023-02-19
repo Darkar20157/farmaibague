@@ -273,7 +273,7 @@ require "header.php";
                             <th>Unidad/Medida</th>
                             <th>Laboratorio</th>
                             <th>Cant. Producto</th>
-                            <th>Precio Compra</th>
+                            <th>Precio Venta</th>
                             <th>Embalaje</th>
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
@@ -377,7 +377,7 @@ require "header.php";
                             <th>Unidad/Medida</th>
                             <th>Laboratorio</th>
                             <th>Cant. Producto</th>
-                            <th>Precio Compra</th>
+                            <th>Precio Venta</th>
                             <th>Embalaje</th>
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
