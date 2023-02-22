@@ -240,8 +240,8 @@ function productoSalidas(){
                 let col = document.getElementById("cargando");
                 col.innerHTML = "";
                 $("#producto_salida").val(response.NAME_PRODUCT);
-                $("#marca").val(response.BRAND);
                 $("#gramaje").val(response.GRAMMAGE_MINIMETERAGE);
+                $("#cantidad").attr('max', response.AMOUNT);
                 $("#embalaje").val(response.PACKAGING);
                 $("#precio").val(response.PRICE);
             }
@@ -280,6 +280,14 @@ function carrito(){
         url: "Model/carrito.php",
         data: array,
         success: function(response){
+            if(response == 'no hay'){
+                Swal.fire(
+                    'Ups!',
+                    'Esa cantidad no existe en el inventario',
+                    'warning'
+                )
+                return false;
+            }
             document.getElementById("fila").innerHTML = response;
         }
     })
@@ -309,7 +317,6 @@ function eliminarUnidad(id, embajale){
         "embalaje": embajale
     }
     document.getElementById("fila").innerHTML = "<div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div>";
-    console.log(array);
     $.ajax({
         type: "POST",
         url: "Model/carrito.php",

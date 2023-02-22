@@ -22,7 +22,6 @@ if(isset($_POST['cod'])){
     $JSON = json_encode($array);
     print_r($JSON);
 }elseif(isset($_POST['barcode'])){
-    //Hola
     $cod = $_POST['barcode'];
     $embalaje = $_POST['embalaje'];
     $sql = "SELECT

@@ -12,6 +12,14 @@ if(isset($_POST['cod'])){
     $discount = $_POST['dis'];
     $embalaje = $_POST['emb'];
     
+    $sql = "SELECT AMOUNT FROM INVENTARIO WHERE BARCODE = $cod AND PACKAGING = '$embalaje'";
+    $consult = mysqli_query($conexion, $sql);
+    if($consult){
+        $row = mysqli_fetch_assoc($consult);
+        if($row['AMOUNT'] < $cant){
+            die("no hay");
+        }
+    }
     $sql = "INSERT INTO DETAIL_PRODUCT(BARCODE, NAME_PRODUCT, AMOUNT, GRAMMAGE_MINIMETERAGE, PRICE, DISCOUNT_ID, PACKAGING) 
     VALUES($cod, '$nom', $cant, '$gram', $precio, $discount, '$embalaje')";
     $result = mysqli_query($conexion, $sql);

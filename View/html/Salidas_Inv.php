@@ -152,7 +152,7 @@ require 'header.php';
                             </td>
                             <td><input class="form-control" type="text" id="producto_salida" readonly></td>
                             <td><input class="form-control" type="text" id="gramaje" readonly></td>
-                            <td><input class="form-control" type="number" id="cantidad"></td>
+                            <td><input class="form-control" type="number" id="cantidad" max="5"></td>
                             <td><input class="form-control" type="number" id="precio" readonly></td>
                             <td>
                                 <select class="form-select" name="discount" id="discount">
