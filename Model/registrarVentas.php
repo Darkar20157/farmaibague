@@ -79,17 +79,24 @@ if(isset($_POST['ced'])){
             $consult2 = mysqli_query($conexion, $sql2);
             if($consult2){
                 while($row2 = mysqli_fetch_assoc($consult2)){
+                    $bar = $row2['BARCODE'];
+                    $pag = $row2['PACKAGING'];
+                    //Consulta precio venta
+                    $sql0 = "SELECT MAX(PRICE_BUY) AS PRICE_BUY FROM DETAIL_INVENTORY WHERE BARCODE = $bar AND PACKAGING = '$pag'";
+                    $consult0 = mysqli_query($conexion, $sql0);
+                    $row0 = mysqli_fetch_assoc($consult0);
+                    print_r($row0);
                     $descuento = ($row2['TOTAL'] * $row2['DISCOUNT_PRICE']) / 100;
-                    $total = 
                     $array[$i] = [
                             "BARCODE" => $row2['BARCODE'], 
                             "AMOUNT" => $row2['AMOUNT'],
                             "PRICE_UNID" => $row2['PRICE'],
+                            "PRICE_BUY" => $row0['PRICE_BUY'],
                             "PACKAGING" => $row2['PACKAGING'],
                             "TOTAL_ITEMS" => $items,
                             "DISCOUNT_ID" => $row2['DISCOUNT_ID'],
                             "TOTAL_REGISTER" => $row2['TOTAL'] - $descuento,
-                            "TOTAL_VOUCHER" => $total_voucher
+                            "TOTAL_VOUCHER" => $total_voucher,
                             ];
                     $items = $items + 1;
                     $i = $i + 1;
@@ -98,13 +105,14 @@ if(isset($_POST['ced'])){
                     $barcode = $array[$i]['BARCODE'];
                     $amount = $array[$i]['AMOUNT'];
                     $priceUnid = $array[$i]['PRICE_UNID'];
+                    $priceBuy = $array[$i]['PRICE_BUY'];
                     $embalaje = $array[$i]['PACKAGING'];
                     $items = $array[$i]['TOTAL_ITEMS'];
                     $discount = $array[$i]['DISCOUNT_ID'];
                     $total_register = $array[$i]['TOTAL_REGISTER'];
                     $total_voucher = $array[$i]['TOTAL_VOUCHER'];
-                    $sql3 = "INSERT INTO SALES(NRO_FACTURA, CED_NRO, DATE_VOUCHER, BARCODE, AMOUNT, PRICE_UNID, PACKAGING, DISCOUNT_ID, COST_ADDITIONAL_ID, TOTAL_ITEMS, PAYMENT_METHOD_ID, PAY_CLIENT, EXCHANGE, TOTAL_REGISTER, TOTAL_VOUCHER)
-                    VALUES('$id', $cedsale, '$date', $barcode, $amount, $priceUnid, '$embalaje', $discount, $costAdi, $items, $methodPay, $pago, $cambio, $total_register, $total_voucher)";
+                    $sql3 = "INSERT INTO SALES(NRO_FACTURA, CED_NRO, DATE_VOUCHER, BARCODE, AMOUNT, PRICE_UNID, PRICE_BUY, PACKAGING, DISCOUNT_ID, COST_ADDITIONAL_ID, TOTAL_ITEMS, PAYMENT_METHOD_ID, PAY_CLIENT, EXCHANGE, TOTAL_REGISTER, TOTAL_VOUCHER)
+                    VALUES('$id', $cedsale, '$date', $barcode, $amount, $priceUnid, $priceBuy,'$embalaje', $discount, $costAdi, $items, $methodPay, $pago, $cambio, $total_register, $total_voucher)";
                     $consult3 = mysqli_query($conexion, $sql3);
                 }
                 $array2 = [];

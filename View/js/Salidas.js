@@ -405,6 +405,7 @@ function salidas(){
         url: "Model/registrarVentas.php",
         data: array,
         success: function(response){
+            console.log(response)
             if(isNaN(response)){
                 Swal.fire(
                     "Registro Exitoso!",
@@ -428,15 +429,15 @@ function salidas(){
                         )
                         imprimir(response);
                         
-                        setTimeout(function(){
-                            location.reload();
-                        }, 5000);
+                        // setTimeout(function(){
+                        //     location.reload();
+                        // }, 5000);
                         
                     }else{
                         
-                        setTimeout(function(){
-                            location.reload();
-                        }, 2000);
+                        // setTimeout(function(){
+                        //     location.reload();
+                        // }, 2000);
                         
                     }
                   })

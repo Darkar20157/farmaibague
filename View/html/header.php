@@ -70,6 +70,7 @@ if($TP == 1){
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/Salidas_Inv.php"); ?>">Ventas</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/reportes.php"); ?>">Reportes</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/costos_adicionales.php"); ?>">Configuracion</a>
+            <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/devoluciones.php"); ?>">Devoluciones</a>
         </ul>
     </nav>
     <label for="btn-menu" class="icon-equis"><h6>x</h6></label>
@@ -126,6 +127,7 @@ if($TP == 1){
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/Salidas_Inv.php"); ?>">Ventas</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/reportes.php"); ?>">Reportes</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/costos_adicionales.php"); ?>">Configuracion</a>
+            <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/devoluciones.php"); ?>">Devoluciones</a>
         </ul>
     </nav>
     <label for="btn-menu" class="icon-equis"><h6>x</h6></label>

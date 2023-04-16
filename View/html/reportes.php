@@ -24,78 +24,53 @@ require "header.php";
             <h3><img src="https://img.icons8.com/arcade/50/null/economic-improvement.png"/> Reportes</h3>
         </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h3>Día</h3>
+            <input class="form-control" type="date" id="date">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h3><img src="https://img.icons8.com/ios/30/null/low-importance.png"/></h3>
+            <button class="btn btn-success" onclick="seacherReport()">Buscar</button>
+        </div>
+    </div>
 </div>
 <div class="container" id="contenedor" style="background-color: white; border-radius: 10px;">
-    <div class="row" id="row1">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="col">
-            <?php
-            $sql = "SELECT 
-            SL.DATE_VOUCHER,
-            DI.BARCODE, 
-            DI.NAME_PRODUCT, 
-            DI.PACKAGING, 
-            DI.AMOUNT, 
-            DI.PRICE_UNID, 
-            DI.PRICE_BUY,
-            (SL.PRICE_UNID * SL.AMOUNT) AS TOTAL_VENTA,
-            (SL.PRICE_UNID * SL.AMOUNT) - DI.PRICE_BUY AS TOTAL_GANADO
-            FROM DETAIL_INVENTORY DI
-            LEFT JOIN SALES SL
-            ON SL.BARCODE = DI.BARCODE";
-            $consulta = mysqli_query($conexion, $sql);
-            ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="table-responsive">
                 <table class="table table-hover" id="table2">
                     <thead>
                         <tr class="table-dark">
                             <th>Fecha Venta</th>
-                            <th>Codigo Producto</th>
+                            <th>Codigo barras</th>
                             <th>Nombre Producto</th>
-                            <th>Embalaje</th>
+                            <th>Presentacion</th>
                             <th>Cantidad</th>
-                            <th>Precio Unid.</th>
-                            <th>Precio Compra</th>
-                            <th>Total Venta</th>
-                            <th>Total Ganado</th>
+                            <th>Total Vendido</th>
+                            <th>Total Comprado</th>
+                            <th>Total ganado</th>
+                            <th>Precio costos adicionales</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    <?php
-                    while($row = mysqli_fetch_array($consulta)){
-                        ?>
-                        <tr class="table-danger">
-                            <td><?php echo $row['DATE_VOUCHER']; ?></td>
-                            <td><?php echo $row['BARCODE']; ?></td>
-                            <td><?php echo $row['NAME_PRODUCT']; ?></td>
-                            <td><?php echo $row['PACKAGING']; ?></td>
-                            <td><?php echo $row['AMOUNT']; ?></td>
-                            <td><?php echo $row['PRICE_UNID']; ?></td>
-                            <td><?php echo $row['PRICE_BUY']; ?></td>
-                            <td><?php echo $row['TOTAL_VENTA']; ?></td>
-                            <td><?php echo $row['TOTAL_GANADO']; ?></td>
-                        </tr>
-                        <?php
-                        }
-                        ?>
+                    <tbody id="row1">
                     </tbody>
-                    <tfoot>
+                    <tfoot> 
                         <tr class="footers">
                             <th>Fecha Venta</th>
-                            <th>Codigo Producto</th>
+                            <th>Codigo barras</th>
                             <th>Nombre Producto</th>
-                            <th>Embalaje</th>
+                            <th>Presentacion</th>
                             <th>Cantidad</th>
-                            <th>Precio Unid.</th>
-                            <th>Precio Compra</th>
-                            <th>Total Venta</th>
-                            <th>Total Ganado</th>
+                            <th>Total Vendido</th>
+                            <th>Total Comprado</th>
+                            <th>Total ganado</th>
+                            <th>Precio costos adicionales</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-            <br>
-            <h5 id="ocultar1" onclick="ocultar2()"><img src="https://img.icons8.com/ios-glyphs/20/000000/double-up--v2.png"/>Ocultar</h5>
-            <br>
         </div>
     </div>
 </div>
@@ -111,8 +86,8 @@ require "header.php";
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-colvis-2.1.1/b-html5-2.1.1/b-print-2.1.1/datatables.min.js"></script>
 
 <!-- Script echos  -->
+<script src="View/js/reportes.js"></script>
 <script src="View/js/select2.js"></script>
-<script src="View/js/Entradas.js"></script>
 <script src="View/js/notificacionesAdmin.js"></script>
 <script src="View/js/navbar.js"></script>
 
