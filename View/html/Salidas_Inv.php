@@ -270,7 +270,9 @@ require 'header.php';
                             <th>Total Factura</th>
                             <th>Pago Cliente</th>
                             <th>Cambio</th>
+                            <th>Estado</th>
                             <th>Imprimir</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -296,7 +298,8 @@ require 'header.php';
                         SL.TOTAL_REGISTER,
                         SL.TOTAL_VOUCHER,
                         SL.PAY_CLIENT,
-                        SL.EXCHANGE
+                        SL.EXCHANGE,
+                        SL.STATE
                         FROM SALES SL
                         INNER JOIN CLIENTS CL ON SL.CED_NRO = CL.CED_NRO
                         INNER JOIN DETAIL_ART BR ON SL.BARCODE = BR.BARCODE
@@ -330,6 +333,17 @@ require 'header.php';
                                 <td>$<?php echo $rows2['PAY_CLIENT'] ?></td>
                                 <td>$<?php echo $rows2['EXCHANGE'] ?></td>
                                 <td><button class="btn btn-success" onclick="imprimir('<?php echo $rows2['NRO_FACTURA']?>')">Imprimir</button></td>
+                                <?php
+                                    if($rows2['STATE'] == false){
+                                        ?>
+                                        <td><span class="badge bg-success">Vendido</span></td>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <td><span class="badge bg-danger">Devuelto</span></td>
+                                        <?php
+                                    }
+                                ?>
                             </tr>
                         <?php
                         }
