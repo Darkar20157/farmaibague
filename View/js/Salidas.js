@@ -465,7 +465,7 @@ function imprimir(id){
         url: "Model/imprimir.php",
         data: array,
         success: function(response){
-            console.log(response);
+            window.location.reload()
         }
     })
 }
