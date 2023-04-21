@@ -465,7 +465,9 @@ function imprimir(id){
         url: "Model/imprimir.php",
         data: array,
         success: function(response){
-            window.location.reload()
+            setTimeout(function(){
+                window.location.reload()
+            }, 4000)
         }
     })
 }
