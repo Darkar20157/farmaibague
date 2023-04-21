@@ -13,9 +13,9 @@ try{
 
 	/*================ Body de la Facturacion ==================*/
 	$i = 0;
-	$voucherNro =$_POST['nroFactura'];
+	$numFactura = $_POST['nroFactura'];
 	$sql = "SELECT 
-	NRO_FACTURA, 
+	SL.NRO_FACTURA, 
 	SL.CED_NRO,
 	CL.NAMES,
 	CL.ADDRES,
@@ -41,7 +41,7 @@ try{
     INNER JOIN COST_ADDITIONAL CA ON SL.COST_ADDITIONAL_ID = CA.ID
     INNER JOIN PAYMENT_METHOD PM ON SL.PAYMENT_METHOD_ID = PM.ID
     INNER JOIN DISCOUNTS DS ON SL.DISCOUNT_ID = DS.ID
-	WHERE NRO_FACTURA = '$voucherNro'";
+	WHERE NRO_FACTURA = '$numFactura'";
 	$consult = mysqli_query($conexion, $sql);
 	while($row = mysqli_fetch_assoc($consult)){
 		$array[$i] = ["NRO_FACTURA" => $row['NRO_FACTURA'], 
@@ -86,6 +86,7 @@ try{
 	$printer->text("======DETALLES PRODUCTOS======\n");
 	$i = 1;
 	for ($j=0; $j < count($array); $j++) { 
+		$descuento = $array[$j]['DISCOUNT_PRICE'];
 		$printer->text("Cant. ".$array[$j]['AMOUNT']."\n");
 		$printer->text("Producto: ".$array[$j]['NAME_PRODUCT']."\n");
 		$printer->text("Precio Unid.: $".number_format($array[$j]["PRICE_UNID"],0,',','.')."\n");

@@ -405,7 +405,6 @@ function salidas(){
         url: "Model/registrarVentas.php",
         data: array,
         success: function(response){
-            console.log(response)
             if(isNaN(response)){
                 Swal.fire(
                     "Registro Exitoso!",

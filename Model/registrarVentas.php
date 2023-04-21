@@ -85,7 +85,6 @@ if(isset($_POST['ced'])){
                     $sql0 = "SELECT MAX(PRICE_BUY) AS PRICE_BUY FROM DETAIL_INVENTORY WHERE BARCODE = $bar AND PACKAGING = '$pag'";
                     $consult0 = mysqli_query($conexion, $sql0);
                     $row0 = mysqli_fetch_assoc($consult0);
-                    print_r($row0);
                     $descuento = ($row2['TOTAL'] * $row2['DISCOUNT_PRICE']) / 100;
                     $array[$i] = [
                             "BARCODE" => $row2['BARCODE'], 
