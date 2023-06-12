@@ -30,7 +30,7 @@ require 'header.php';
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <h5 id="cargando1">Buscar cliente por cedula <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" style="padding: 2px 5px;"><img src="https://img.icons8.com/fluency/25/null/add-user-male.png"/></button></h5>
             <select class="form-select" id="ced" onchange="search('cedula')">
-                <option value="">Elige un Cliente</option>
+                <option value="111111">111111 - GENERAL</option>
                 <?php
                 $sql = "SELECT * FROM CLIENTS WHERE STATES = true";
                 $consult = mysqli_query($conexion, $sql);
@@ -156,7 +156,7 @@ require 'header.php';
                             <td><input class="form-control" type="number" id="precio" readonly></td>
                             <td>
                                 <select class="form-select" name="discount" id="discount">
-                                    <option value="">Selecciona un Descuento</option>
+                                    <option value="8">8 - SIN DESCUENTO</option>
                                     <?php
                                     $sql = "SELECT * FROM DISCOUNTS";
                                     $consult = mysqli_query($conexion, $sql);
@@ -202,7 +202,7 @@ require 'header.php';
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" id="col">
             <h5>Costos Adicionales</h5>
             <select class="form-select" name="costAdi" id="costAdi">
-                <option value="">Selecciona un Costo Adicional</option>
+                <option value="4">SIN DOMICILIO</option>
                 <?php
                 $sql = "SELECT * FROM COST_ADDITIONAL";
                 $consult = mysqli_query($conexion, $sql);
@@ -217,7 +217,7 @@ require 'header.php';
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" id="col">
             <h5>Metodo de Pago</h5>
             <select class="form-select" name="methodPay" id="methodPay">
-                <option value="">Selecciona un Costo Adicional</option>
+                <option value="5">EFECTIVO</option>
                 <?php
                 $sql = "SELECT * FROM PAYMENT_METHOD";
                 $consult = mysqli_query($conexion, $sql);

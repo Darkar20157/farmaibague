@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    search("cedula");
     $("#ced").select2();
     $("#cel").select2();
     const loader = document.querySelector(".contenedor-loader");
@@ -153,8 +154,8 @@ function aggClient(){
             }
         }
     })
-
 }
+
 function search(type){
     var tipo = "";
     var id = null;
@@ -185,9 +186,8 @@ function search(type){
             $("#email").val(response.EMAIL);
         }
     })
-
-    
 }
+
 function datosEntrega(){
     document.getElementById("cargando1").innerHTML = "Cedula <div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'>Loading...</span></div>"
     let cedula = $("#ced_resp").val();
@@ -428,15 +428,15 @@ function salidas(){
                         )
                         imprimir(response);
                         
-                        // setTimeout(function(){
-                        //     location.reload();
-                        // }, 5000);
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
                         
                     }else{
                         
-                        // setTimeout(function(){
-                        //     location.reload();
-                        // }, 2000);
+                        setTimeout(function(){
+                            location.reload();
+                        }, 5000);
                         
                     }
                   })
@@ -446,11 +446,6 @@ function salidas(){
                     title: "Oops",
                     text: "No se puedo registrar "+response
                 })
-                /*
-                setTimeout(function(){
-                    location.reload();
-                }, 2000);
-                */
             }
         }
     })
