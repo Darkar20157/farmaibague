@@ -1,6 +1,6 @@
 <?php
 try{
-  $conexion = mysqli_connect("localhost", "FarmaIbague", "FarmaIbague2023*", "FarmaIbague");
+  $conexion = mysqli_connect("localhost", "root", "", "FarmaIbague");
   if(!$conexion){
     throw new Exception('No se pudo conectar a la DB');
   }

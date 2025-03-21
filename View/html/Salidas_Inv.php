@@ -20,8 +20,17 @@ require 'header.php';
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
             <h3><img src="https://img.icons8.com/wired/64/null/old-cash-register.png"/> Ventas</h3>
+        </div>
+        <?php 
+        $sql = "SELECT * FROM CONSECUTIVE ORDER BY VOUCHER_NRO DESC LIMIT 1";
+        $consult = mysqli_query($conexion, $sql);
+        $consecutive = mysqli_fetch_assoc($consult);
+        ?>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+            
+            <h4>N° <?php echo $consecutive['RESOLUTION_CODE'],"-",$consecutive['VOUCHER_NRO'] + 1?></h4>
         </div>
     </div>
     <br>
@@ -250,6 +259,7 @@ require 'header.php';
                 <table class="table table-hover" id="table1">
                     <thead>
                         <tr class="table-dark">
+                            <th>Consecutivo</th>
                             <th>Numero Factura</th>
                             <th>Cedula Cliente</th>
                             <th>Nombres</th>
@@ -272,7 +282,6 @@ require 'header.php';
                             <th>Cambio</th>
                             <th>Estado</th>
                             <th>Imprimir</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
@@ -299,7 +308,8 @@ require 'header.php';
                         SL.TOTAL_VOUCHER,
                         SL.PAY_CLIENT,
                         SL.EXCHANGE,
-                        SL.STATE
+                        SL.STATE,
+                        SL.CONSECUTIVE_ID
                         FROM SALES SL
                         INNER JOIN CLIENTS CL ON SL.CED_NRO = CL.CED_NRO
                         INNER JOIN DETAIL_ART BR ON SL.BARCODE = BR.BARCODE
@@ -307,11 +317,13 @@ require 'header.php';
                         INNER JOIN PAYMENT_METHOD PM ON SL.PAYMENT_METHOD_ID = PM.ID
                         INNER JOIN DISCOUNTS DS ON SL.DISCOUNT_ID = DS.ID
                         GROUP BY SL.NRO_FACTURA
-                        ORDER BY SL.ID ASC";
+                        ORDER BY SL.DATE_VOUCHER DESC
+                        LIMIT 200";
                         $consult2 = mysqli_query($conexion, $sql2);
                         while($rows2 = mysqli_fetch_assoc($consult2)){
                         ?>
                             <tr>
+                                <td><?php echo $rows2['CONSECUTIVE_ID'] ?></td>
                                 <td><?php echo $rows2['NRO_FACTURA'] ?></td>
                                 <td><?php echo $rows2['CED_NRO'] ?></td>
                                 <td><?php echo $rows2['NAMES'] ?></td>
@@ -351,6 +363,7 @@ require 'header.php';
                     </tbody>
                     <tfoot>
                         <tr class="footers">
+                            <th>Consecutivo</th>
                             <th>Numero Factura</th>
                             <th>Cedula Cliente</th>
                             <th>Nombres</th>

@@ -21,6 +21,53 @@ require 'header.php';
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h3><img width="64" height="64" src="https://img.icons8.com/glyph-neue/64/receipt.png" alt="receipt"/> Resolucion</h3>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <!-- Consulta para buscar la persona quien recibe el inventario -->
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h5 id="cargando1">Cod. Prefijo</h5>
+            <input class="form-control" type="text" id="prefix" name="prefix">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h5 id="cargando1">Fecha Inicial</h5>
+            <input class="form-control" type="date" id="dateInitial" name="dateInitial">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h5 id="cargando1">Fecha Final</h5>
+            <input class="form-control" type="date" id="dateEnd" name="dateEnd">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h5 id="cargando1">Rango Inicial</h5>
+            <input class="form-control" type="number" id="rangeInitial" name="rangeInitial">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h5 id="cargando1">Rango Final</h5>
+            <input class="form-control" type="number" id="rangeFinal" name="rangeFinal">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h5 id="cargando1">Numero Autorizacion</h5>
+            <input class="form-control" type="number" id="nroAutorization" name="nroAutorization">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h5 id="cargando1">Codigo Tecnico</h5>
+            <input class="form-control" type="text" id="codeTechnical" name="codeTechnical">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <button class="btn btn-primary" style="width: 100%;" onclick="aggResolution()">Agregar Resolucion</button>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <h3><img src="https://img.icons8.com/ios-filled/50/null/settings-3.png"/> Proveedores</h3>
         </div>
     </div>
@@ -117,6 +164,71 @@ require 'header.php';
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <button class="btn btn-primary" onclick="aggCost()">Agregar Costo Adicional</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h3>Resoluciones</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="carrito">
+            <div class="table-responsive">
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Id</th>
+                            <th>Codigo Resolucion</th>
+                            <th>Fecha Inicial</th>
+                            <th>Fecha Final</th>
+                            <th>Rango Inicial</th>
+                            <th>Rango Final</th>
+                            <th>Numero Autorizacion</th>
+                            <th>Codigo Tecnico</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <?php
+                        $sql = "SELECT * 
+                        FROM RESOLUTION ";
+                        $consult = mysqli_query($conexion, $sql);
+                    ?>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_assoc($consult)){
+                        ?>
+                            <tr>
+                                <td><?php echo $row['ID'] ?></td>
+                                <td><?php echo $row['CODE_RESOLUTION'] ?></td>
+                                <td><?php echo $row['ISSUE_DATE_START'] ?></td>
+                                <td><?php echo $row['ISSUE_DATE_END'] ?></td>
+                                <td><?php echo $row['RANGE_INITIAL'] ?></td>
+                                <td><?php echo $row['RANGE_END'] ?></td>
+                                <td><?php echo $row['NRO_AUTORIZATION'] ?></td>
+                                <td><?php echo $row['CODE_TECHNICAL'] ?></td>
+                                <td><button class="btn btn-danger" onclick="eliminar('RESOLUTION', <?php echo $row['ID'] ?>)">Eliminar</button></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr class="footers">
+                            <th>Id</th>
+                            <th>Codigo Resolucion</th>
+                            <th>Fecha Inicial</th>
+                            <th>Fecha Final</th>
+                            <th>Rango Inicial</th>
+                            <th>Rango Final</th>
+                            <th>Numero Autorizacion</th>
+                            <th>Codigo Tecnico</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 </div>

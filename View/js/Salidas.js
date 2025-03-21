@@ -31,7 +31,7 @@ $(document).ready(function(){
         buttons: [
             'copy', 'excel', 'pdf'
         ],
-        pageLength: 50
+        pageLength: 20
     });
     $('#table3').DataTable({
         initComplete: function () {
@@ -157,6 +157,7 @@ function aggClient(){
 }
 
 function search(type){
+    console.log(type);
     var tipo = "";
     var id = null;
     if(type == 'cedula'){
@@ -350,7 +351,6 @@ function verTotal(){
         dataType: 'json',
         data: array,
         success: function(response){
-            console.log(response)
             let subtotal = response.subtotal;
             let total = response.total;
             $("#subtotal").val(subtotal);
@@ -460,22 +460,23 @@ function imprimir(id){
         url: "Model/imprimir.php",
         data: array,
         success: function(response){
-            setTimeout(function(){
-                window.location.reload()
-            }, 4000)
+            console.log(response);
+            // setTimeout(function(){
+            //     window.location.reload()
+            // }, 4000)
         }
     })
 }
 
 //Dinamismo en mostrar las tablas
-document.getElementById("T1").style.cursor = "pointer";
-document.getElementById("T3").style.cursor = "pointer";
+// document.getElementById("T1").style.cursor = "pointer";
+// document.getElementById("T3").style.cursor = "pointer";
 
-document.getElementById("row1").style.display = "none";
-document.getElementById("row3").style.display = "none";
+// document.getElementById("row1").style.display = "none";
+// document.getElementById("row3").style.display = "none";
 
-document.getElementById("ocultar1").style.cursor = "pointer";
-document.getElementById("ocultar3").style.cursor = "pointer";
+// document.getElementById("ocultar1").style.cursor = "pointer";
+// document.getElementById("ocultar3").style.cursor = "pointer";
 
 //Tabla 1
 function mostrar1(){

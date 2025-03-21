@@ -54,11 +54,27 @@ if(isset($_POST['ced'])){
         $costAdi = $_POST['costAdi'];
         $methodPay = $_POST['methodPay'];
         $date = date("Y-m-d H:i:s");
+
+        $sqlRes = "SELECT * FROM RESOLUTION ORDER BY ID DESC LIMIT 1";
+        $consultRes = mysqli_query($conexion, $sqlRes);
+        $rowRes = mysqli_fetch_assoc($consultRes);
+        $codeResolution = $rowRes['CODE_RESOLUTION'];
+
+        $sqlConsecutive = "INSERT INTO CONSECUTIVE (RESOLUTION_CODE) VALUES ('$codeResolution')";
+        $consultRes = mysqli_query($conexion, $sqlConsecutive);
+
+        $sqlConsecutive2 = "SELECT * FROM CONSECUTIVE ORDER BY VOUCHER_NRO DESC LIMIT 1";
+        $consultConsecutive = mysqli_query($conexion, $sqlConsecutive2);
+        $resConsecutive = mysqli_fetch_assoc($consultConsecutive);
+        $consecutive = $resConsecutive['VOUCHER_NRO'];
+
+        //Busca el ultimo id de la tabla
+
         $sql = "SELECT MAX(ID) AS ID FROM SALES";
         $consult = mysqli_query($conexion, $sql);
         if($consult){
             $id = mysqli_fetch_assoc($consult);
-            $id = "JVS"."-".$id['ID']+1;
+            $id = $codeResolution."-".$consecutive;
             //Total del voucher
             $sql2 = "SELECT PRICE, AMOUNT, DS.DISCOUNT_PRICE FROM DETAIL_PRODUCT DP INNER JOIN DISCOUNTS DS ON DP.DISCOUNT_ID = DS.ID";
             $consult2 = mysqli_query($conexion, $sql2);
@@ -110,8 +126,8 @@ if(isset($_POST['ced'])){
                     $discount = $array[$i]['DISCOUNT_ID'];
                     $total_register = $array[$i]['TOTAL_REGISTER'];
                     $total_voucher = $array[$i]['TOTAL_VOUCHER'];
-                    $sql3 = "INSERT INTO SALES(NRO_FACTURA, CED_NRO, DATE_VOUCHER, BARCODE, AMOUNT, PRICE_UNID, PRICE_BUY, PACKAGING, DISCOUNT_ID, COST_ADDITIONAL_ID, TOTAL_ITEMS, PAYMENT_METHOD_ID, PAY_CLIENT, EXCHANGE, TOTAL_REGISTER, TOTAL_VOUCHER)
-                    VALUES('$id', $cedsale, '$date', $barcode, $amount, $priceUnid, $priceBuy,'$embalaje', $discount, $costAdi, $items, $methodPay, $pago, $cambio, $total_register, $total_voucher)";
+                    $sql3 = "INSERT INTO SALES(NRO_FACTURA, CED_NRO, DATE_VOUCHER, BARCODE, AMOUNT, PRICE_UNID, PRICE_BUY, PACKAGING, DISCOUNT_ID, COST_ADDITIONAL_ID, TOTAL_ITEMS, PAYMENT_METHOD_ID, PAY_CLIENT, EXCHANGE, TOTAL_REGISTER, TOTAL_VOUCHER, CONSECUTIVE_ID)
+                    VALUES('$id', $cedsale, '$date', $barcode, $amount, $priceUnid, $priceBuy,'$embalaje', $discount, $costAdi, $items, $methodPay, $pago, $cambio, $total_register, $total_voucher, $consecutive)";
                     $consult3 = mysqli_query($conexion, $sql3);
                 }
                 $array2 = [];

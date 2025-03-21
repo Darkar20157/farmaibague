@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("America/Mexico_City");
 require 'Conexiones.php';
-require __DIR__ . '/../ticket/autoload.php';
+require __DIR__ . '/ticket/autoload.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;

@@ -1,5 +1,24 @@
 <?php
 require "Conexiones.php";
+if(isset($_POST['prefix'])){
+    try{
+        $prefix = $_POST['prefix'];
+        $dateInitial = $_POST['dateInitial'];
+        $dateEnd = $_POST['dateEnd'];
+        $rangeInitial = $_POST['rangeInitial'];
+        $rangeFinal = $_POST['rangeFinal'];
+        $nroAutorization = $_POST['nroAutorization'];
+        $codeTechnical = $_POST['codeTechnical'];
+        $sql = "INSERT INTO RESOLUTION(CODE_RESOLUTION, ISSUE_DATE_START, ISSUE_DATE_END, RANGE_INITIAL, RANGE_END, NRO_AUTORIZATION, CODE_TECHNICAL) 
+        VALUES('$prefix', '$dateInitial', '$dateEnd', $rangeInitial, $rangeFinal, $nroAutorization, '$codeTechnical')";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo $ex;
+    }
+}
 if(isset($_POST['cost'])){
     try{
         $name = $_POST['cost'];

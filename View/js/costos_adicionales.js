@@ -178,6 +178,57 @@ function eliminar(type, id){
         }
     })
 }
+function aggResolution(){
+    let prefix = document.getElementById("prefix").value;
+    let dateInitial = document.getElementById("dateInitial").value;
+    let dateEnd = document.getElementById("dateEnd").value;
+    let rangeInitial = document.getElementById("rangeInitial").value;
+    let rangeFinal = document.getElementById("rangeFinal").value;
+    let nroAutorization = document.getElementById("nroAutorization").value;
+    let codeTechnical = document.getElementById("codeTechnical").value;
+    if(prefix == "" || dateInitial == "" || dateEnd == "" || rangeInitial == "" || rangeFinal == ""){
+        Swal.fire(
+            "Ups!",
+            "Hay campos vacios para crear la resolucion ",
+            "error"
+        )
+        return false;
+    }
+    let array = {
+        "prefix": prefix,
+        "dateInitial": dateInitial,
+        "dateEnd": dateEnd,
+        "rangeInitial": rangeInitial,
+        "rangeFinal": rangeFinal,
+        "nroAutorization": nroAutorization,
+        "codeTechnical": codeTechnical,
+    }
+    $.ajax({
+        type: "POST",
+        url: "Model/costosAdicionales.php",
+        data: array,
+        success: function(response){
+            if(response == "Correcto"){
+                Swal.fire(
+                    "Excelente!",
+                    "Se ha eliminado correctamente",
+                    "success"
+                )
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000);
+            }else{
+                Swal.fire(
+                    "Ups!",
+                    "Ha ocurrido un error "+response,
+                    "error"
+                )
+                return false;
+            }
+        }
+    })
+}
+
 function aggVendor(){
     let nit = document.getElementById("nitVendor").value;
     let name = document.getElementById("nameVendor").value;
