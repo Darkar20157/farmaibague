@@ -145,7 +145,7 @@ require 'header.php';
                                     ?>
                                 </select>
                             </td>
-                            <td><input class="form-control" type="text" id="packaging" readonly></td>
+                            <td><input class="form-control" type="text" id="embalaje" readonly></td>
                             <td><input class="form-control" type="text" id="producto_salida" readonly></td>
                             <td><input class="form-control" type="text" id="gramaje" readonly></td>
                             <td><input class="form-control" type="number" id="cantidad" max="5"></td>

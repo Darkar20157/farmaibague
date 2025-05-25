@@ -233,20 +233,18 @@ function productoSalidas(){
                 )
                 $("#cod_salida").val("");
                 $("#producto_salida").val("");
-                $("#packaging").val("");
+                $("#embalaje").val("");
                 $("#marca").val("");
                 $("#gramaje").val("");
                 $("#embalaje").val("");
                 $("#precio").val("");
             }else{
                 let col = document.getElementById("cargando");
-                console.log(response);
                 col.innerHTML = "";
                 $("#producto_salida").val(response.NAME_PRODUCT);
-                $("#packaging").val(response.PACKAGING);
+                $("#embalaje").val(response.PACKAGING);
                 $("#gramaje").val(response.GRAMMAGE_MINIMETERAGE);
                 $("#cantidad").attr('max', response.AMOUNT);
-                $("#embalaje").val(response.PACKAGING);
                 $("#precio").val(response.PRICE);
             }
         }
