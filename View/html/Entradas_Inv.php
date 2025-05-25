@@ -16,6 +16,7 @@
 <body style="background-color: whitesmoke;">
 <?php
 require "header.php";
+$typeUser = $_SESSION['TYPE_USER'];
 ?>
 <!-- Inventario Entradas -->
 <div class="container" style="background-color: white; border-radius: 10px;">
@@ -32,6 +33,7 @@ require "header.php";
         </div>
     </div>
     <br>
+    <?php if ($typeUser != 3) { ?>
     <div class="row">
         <!-- Activamos o desactivamos casillas con un click -->
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -116,6 +118,7 @@ require "header.php";
         </div>
     </div>
     <br>
+    <?php } ?>
 </div>
 <!-- Mostramos tablas de inventarios -->
 <div class="container" id="contenedor" style="background-color: white; border-radius: 10px;">
@@ -143,8 +146,10 @@ require "header.php";
                             <th>Embalaje</th>
                             <th>Precio Compra</th>
                             <th>Novedades</th>
+                            <?php if ($typeUser != 3) { ?>
                             <th>Editar</th>
                             <th>Eliminar</th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -162,6 +167,7 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <?php if ($typeUser != 3) { ?>
                                 <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar(<?php echo $row['ID'] ?>,
                                                                                                                                          '<?php echo $row['NAME_PRODUCT'] ?>',
                                                                                                                                          '<?php echo $row['AMOUNT'] ?>',
@@ -170,6 +176,7 @@ require "header.php";
                                                                                                                                          '<?php echo $row['PRICE_BUY'] ?>',
                                                                                                                                          '<?php echo $row['NOTES'] ?>')">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <?php } ?>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] <= 50){
@@ -184,6 +191,7 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <?php if ($typeUser != 3) { ?>
                                 <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar(<?php echo $row['ID'] ?>,
                                                                                                                                          '<?php echo $row['NAME_PRODUCT']?>',
                                                                                                                                          '<?php echo $row['AMOUNT']?>',
@@ -192,6 +200,7 @@ require "header.php";
                                                                                                                                          '<?php echo $row['PRICE_BUY']?>',
                                                                                                                                          '<?php echo $row['NOTES'] ?>')">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <?php } ?>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] > 51){
@@ -206,6 +215,7 @@ require "header.php";
                                 <td><?php echo $row['PACKAGING']; ?></td>
                                 <td><?php echo $row['PRICE_BUY']; ?></td>
                                 <td><?php echo $row['NOTES']; ?></td>
+                                <?php if ($typeUser != 3) { ?>
                                 <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editar(<?php echo $row['ID'] ?>,
                                                                                                                                          '<?php echo $row['NAME_PRODUCT'] ?>',
                                                                                                                                          '<?php echo $row['AMOUNT'] ?>',
@@ -214,6 +224,7 @@ require "header.php";
                                                                                                                                          '<?php echo $row['PRICE_BUY'] ?>',
                                                                                                                                          '<?php echo $row['NOTES'] ?>')">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar(<?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <?php } ?>
                             </tr>
                         <?php
                         }
@@ -279,8 +290,10 @@ require "header.php";
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Celular Proveedor</th>
+                            <?php if ($typeUser != 3) { ?>
                             <th>Editar</th>
                             <th>Eliminar</th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -300,6 +313,7 @@ require "header.php";
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
+                                <?php if ($typeUser != 3) { ?>
                                 <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarInv(<?php echo $row['ID'] ?>,
                                                                                                                                          '<?php echo $row['NAME_PRODUCT'] ?>',
                                                                                                                                          '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>',
@@ -310,6 +324,7 @@ require "header.php";
                                                                                                                                          '<?php echo $row['NIT_VENDOR'] ?>',
                                                                                                                                          )">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminarInv(<?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <?php } ?>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] <= 50){
@@ -326,6 +341,7 @@ require "header.php";
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
+                                <?php if ($typeUser != 3) { ?>
                                 <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarInv(<?php echo $row['ID'] ?>,
                                                                                                                                          '<?php echo $row['NAME_PRODUCT'] ?>',
                                                                                                                                          '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>',
@@ -336,6 +352,7 @@ require "header.php";
                                                                                                                                          '<?php echo $row['NIT_VENDOR'] ?>',
                                                                                                                                          )">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminarInv(<?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <?php } ?>
                             </tr>
                         <?php
                         }elseif($row['AMOUNT'] > 51){
@@ -352,6 +369,7 @@ require "header.php";
                                 <td><?php echo $row['NAME_VENDOR']; ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR']; ?></td>
                                 <td><?php echo $row['PHONE_VENDOR']; ?></td>
+                                <?php if ($typeUser != 3) { ?>
                                 <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarInv(<?php echo $row['ID'] ?>,
                                                                                                                                          '<?php echo $row['NAME_PRODUCT'] ?>',
                                                                                                                                          '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>',
@@ -362,6 +380,7 @@ require "header.php";
                                                                                                                                          '<?php echo $row['NIT_VENDOR'] ?>',
                                                                                                                                          )">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminarInv(<?php echo $row['ID'] ?>)">Eliminar</button></td>
+                                <?php } ?>
                             </tr>
                         <?php
                         }
@@ -383,8 +402,6 @@ require "header.php";
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Celular Proveedor</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </tfoot>
                 </table>

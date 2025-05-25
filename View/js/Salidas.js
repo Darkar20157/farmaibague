@@ -212,12 +212,12 @@ function datosEntrega(){
 //Dinamismo y busqueda del producto
 function productoSalidas(){
     let codP = $("#cod_salida").val();
-    let embalaje = $("#embalaje").val();
+    // let embalaje = $("#embalaje").val();
     let col = document.getElementById("cargando");
     col.innerHTML = "<div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div>";
     let array = {
         "barcode": codP,
-        "embalaje": embalaje
+        // "embalaje": embalaje
     };
     $.ajax({
         type: "POST",
@@ -233,14 +233,17 @@ function productoSalidas(){
                 )
                 $("#cod_salida").val("");
                 $("#producto_salida").val("");
+                $("#packaging").val("");
                 $("#marca").val("");
                 $("#gramaje").val("");
                 $("#embalaje").val("");
                 $("#precio").val("");
             }else{
                 let col = document.getElementById("cargando");
+                console.log(response);
                 col.innerHTML = "";
                 $("#producto_salida").val(response.NAME_PRODUCT);
+                $("#packaging").val(response.PACKAGING);
                 $("#gramaje").val(response.GRAMMAGE_MINIMETERAGE);
                 $("#cantidad").attr('max', response.AMOUNT);
                 $("#embalaje").val(response.PACKAGING);
@@ -358,6 +361,29 @@ function verTotal(){
         }
     })
 }
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && document.querySelector(".swal2-container")) {
+        const cancelButton = document.querySelector(".swal2-cancel");
+        if (cancelButton) {
+            cancelButton.click();
+            window.location.reload();
+            return;
+        }
+    }
+    if(event.key === 'Enter'){
+        if ($('#exampleModal2').hasClass('show')) {
+            event.preventDefault();
+            $('#registrar').click();
+            return;
+        }
+    }
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        $('#vertotal').click();
+        return;
+    }
+});
+
 //Registrar una salida
 function salidas(){
     let ced = $("#cedula_cliente").val();

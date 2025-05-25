@@ -115,8 +115,8 @@ require 'header.php';
                 <table class="table table-hover" id="table">
                     <thead>
                         <tr class="table-dark">
-                            <th>Presentación</th>
                             <th>Agregar Producto</th>
+                            <th>Presentación</th>
                             <th>Producto</th>
                             <th>Unid/Medida</th>
                             <th>Cantidad</th>
@@ -128,20 +128,6 @@ require 'header.php';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                <select class="form-select" name="embalaje" id="embalaje">
-                                    <option value="">Selecciona un opcion</option>
-                                    <?php
-                                    $sql = "SELECT * FROM PRESENTACION";
-                                    $consult = mysqli_query($conexion, $sql);
-                                    while($row = mysqli_fetch_assoc($consult)){
-                                    ?>
-                                    <option value="<?php echo $row['PRESENTACION'] ?>"><?php echo $row['PRESENTACION'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </td>
                             <td>
                                 <select style="width: 100%" class="select2" name="cod_salida" id="cod_salida" onchange="productoSalidas()">
                                     <option value="">Seleccione Codigo</option>
@@ -159,6 +145,7 @@ require 'header.php';
                                     ?>
                                 </select>
                             </td>
+                            <td><input class="form-control" type="text" id="packaging" readonly></td>
                             <td><input class="form-control" type="text" id="producto_salida" readonly></td>
                             <td><input class="form-control" type="text" id="gramaje" readonly></td>
                             <td><input class="form-control" type="number" id="cantidad" max="5"></td>
@@ -240,7 +227,7 @@ require 'header.php';
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" id="col">
             <h5>Totales</h5>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="width: 100%;" onclick="verTotal()">Ver total</button>
+            <button class="btn btn-success" id="vertotal" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="width: 100%;" onclick="verTotal()">Ver total</button>
         </div>
     </div>
     <br>

@@ -40,7 +40,6 @@ function ingresar(){
         url: "Model/login.php", 
         data: array,
         success: function(response){
-            console.log(response);
             if(response == "Correcto"){
                 Swal.fire(
                     'Bienvenido',

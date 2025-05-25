@@ -2,7 +2,61 @@ $(document).ready(function(){
     const loader = document.querySelector(".contenedor-loader");
     loader.style.opacity = 0
     loader.style.visibility = 'hidden';
-})
+    $('#table1').DataTable({
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf'
+        ],
+        pageLength: 20
+    });
+    $('#table2').DataTable({
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf'
+        ],
+        pageLength: 20
+    });
+});
 function aggCost(){
     let name = document.getElementById("cost").value;
     let price = document.getElementById("value").value;
@@ -310,6 +364,41 @@ function aggPresentation(){
                     "error"
                 )
                 return false;
+            }
+        }
+    })
+}
+
+function editarProv(id, nitProv, nomProv, dirProv, telProv) {
+    if(!id == 0){
+        localStorage.setItem("idProv", id);
+        $("#nitProv").val(nitProv)
+        $("#nomProv").val(nomProv)
+        $("#dirProv").val(dirProv)
+        $("#telProv").val(telProv)
+        return false;
+    }
+    let array = {
+        "id": localStorage.getItem("idProv"),
+        "nitProv": $("#nitProv").val(),
+        "nomProv": $("#nomProv").val(),
+        "dirProv": $("#dirProv").val(),
+        "telProv": $("#telProv").val(),
+    }
+    $.ajax({
+        type: "POST",
+        url: "Model/costosAdicionales.php",
+        data: array,
+        success: function(response){
+            if(response == "Correcto"){
+                Swal.fire(
+                    'Editado!!',
+                    'Se ha editado el provvedor correctamente',
+                    'success'
+                )
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000)
             }
         }
     })

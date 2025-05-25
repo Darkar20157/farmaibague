@@ -412,7 +412,7 @@ require 'header.php';
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="table-responsive">
-                <table class="table table-hover" id="table">
+                <table class="table table-hover" id="table1">
                     <thead>
                         <tr class="table-dark">
                             <th>Nombres</th>
@@ -486,14 +486,15 @@ require 'header.php';
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="table-responsive">
-                <table class="table table-hover" id="table">
+                <table class="table table-hover" id="table2">
                     <thead>
                         <tr class="table-dark">
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Telefono Proveedor</th>
-                            <th>Accion</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <?php
@@ -510,21 +511,28 @@ require 'header.php';
                                 <td><?php echo $row['NAME_VENDOR'] ?></td>
                                 <td><?php echo $row['ADDRESS_VENDOR'] ?></td>
                                 <td><?php echo $row['PHONE_VENDOR'] ?></td>
+                                <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="editarProv(<?php echo $row['ID'] ?>,
+                                                                                                                                         '<?php echo $row['NIT_VENDOR'] ?>',
+                                                                                                                                         '<?php echo $row['NAME_VENDOR'] ?>',
+                                                                                                                                         '<?php echo $row['ADDRESS_VENDOR'] ?>',
+                                                                                                                                         '<?php echo $row['PHONE_VENDOR'] ?>',
+                                                                                                                                         )">Editar</button></td>
                                 <td><button class="btn btn-danger" onclick="eliminar('VENDORS', <?php echo $row['ID'] ?>)">Eliminar</button></td>
                             </tr>
                         <?php
                         }
                         ?>
                     </tbody>
-                    <tfoot>
+                    <tfooter>
                         <tr class="footers">
                             <th>Nit Proveedor</th>
                             <th>Nombre Proveedor</th>
                             <th>Direccion Proveedor</th>
                             <th>Telefono Proveedor</th>
-                            <th>Accion</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr>
-                    </tfoot>
+                    </tfooter>
                 </table>
             </div>
         </div>
@@ -567,6 +575,43 @@ require 'header.php';
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" onclick="editar(0)">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Editar Proveedor</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-4">
+                <h5>Nit Proveedor</h5>
+                <input class="form-control" type="text" id="nitProv" name="nitProv">
+            </div>
+            <div class="col-4">
+                <h5>Nombre Proveedor</h5>
+                <input class="form-control" type="text" id="nomProv" name="nomProv">
+            </div>
+            <div class="col-4">
+                <h5>Direccion Proveedor</h5>
+                <input class="form-control" type="text" id="dirProv" name="dirProv">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4">
+                <h5>Telefono Proveedor</h5>
+                <input class="form-control" type="number" id="telProv" name="telProv">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="editarProv(0)">Guardar Cambios</button>
       </div>
     </div>
   </div>

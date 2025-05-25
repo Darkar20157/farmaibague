@@ -11,6 +11,7 @@ $fecha_real = date("Y-m-d");
 require "Model/Conexiones.php";
 session_start();
 $user = $_SESSION['NAME_USER'];
+$typeUser = $_SESSION['TYPE_USER'];
 $sql = "SELECT
 *
 FROM
@@ -125,8 +126,14 @@ if($TP == 1){
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/gestion_productos.php") ?>">Gestion Productos</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/Entradas_Inv.php");?>">Entradas Inventario</a>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/Salidas_Inv.php"); ?>">Ventas</a>
-            <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/reportes.php"); ?>">Reportes</a>
-            <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/costos_adicionales.php"); ?>">Configuracion</a>
+            <?php
+            if($typeUser != 3){
+              ?>
+              <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/reportes.php"); ?>">Reportes</a>
+              <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/costos_adicionales.php"); ?>">Configuracion</a>
+              <?php
+            }
+            ?>
             <a class="opt" href="index.php?accion=<?php echo base64_encode("routePage")?>&ruta=<?php echo base64_encode("View/html/devoluciones.php"); ?>">Devoluciones</a>
         </ul>
     </nav>

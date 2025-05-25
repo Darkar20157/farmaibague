@@ -3,12 +3,12 @@ require "Conexiones.php";
 date_default_timezone_set('America/Bogota');
 if(isset($_POST['ced'])){
     try {
-        $ced = $_POST['ced'];
-        $names = $_POST['names'];
-        $email = $_POST['email'];
-        $address = $_POST['address'];
-        $phone = $_POST['phone'];
-        $gender = $_POST['gender'];
+        $ced = mysqli_real_escape_string($conexion, $_POST['ced']);
+        $names = mysqli_real_escape_string($conexion, $_POST['names']);
+        $email = mysqli_real_escape_string($conexion, $_POST['email']);
+        $address = mysqli_real_escape_string($conexion, $_POST['address']);
+        $phone = mysqli_real_escape_string($conexion, $_POST['phone']);
+        $gender = mysqli_real_escape_string($conexion, $_POST['gender']);        
         $date = date("Y-m-d H:i:s");
         $state = true;
         $sql = "SELECT CED_NRO, PHONE FROM CLIENTS WHERE CED_NRO = '$ced'";
@@ -49,10 +49,11 @@ if(isset($_POST['ced'])){
         $i = 0;
         $items = 1;
         $total_voucher = 0;
-        $cedsale = $_POST['cedSale'];
-        $pago = $_POST['pago'];
-        $costAdi = $_POST['costAdi'];
-        $methodPay = $_POST['methodPay'];
+        $cedsale = mysqli_real_escape_string($conexion, $_POST['cedSale']);
+        $pago = mysqli_real_escape_string($conexion, $_POST['pago']);
+        $costAdi = mysqli_real_escape_string($conexion, $_POST['costAdi']);
+        $methodPay = mysqli_real_escape_string($conexion, $_POST['methodPay']);
+        
         $date = date("Y-m-d H:i:s");
 
         $sqlRes = "SELECT * FROM RESOLUTION ORDER BY ID DESC LIMIT 1";

@@ -1,11 +1,11 @@
 <?php
 require_once "Conexiones.php";
 //Cambiamos datos del usuario
-$ced = $_POST['ced'];
-$user = $_POST['user'];
-$pass = $_POST['pass'];
-$Cpass = $_POST['Cpass'];
-$nom = $_POST['nom'];
+$ced = mysqli_real_escape_string($conexion, $_POST['ced']);
+$user = mysqli_real_escape_string($conexion, $_POST['user']);
+$pass = mysqli_real_escape_string($conexion, $_POST['pass']);
+$Cpass = mysqli_real_escape_string($conexion, $_POST['Cpass']);
+$nom = mysqli_real_escape_string($conexion, $_POST['nom']);
 if($pass != $Cpass){
     die("Error pass");
 }

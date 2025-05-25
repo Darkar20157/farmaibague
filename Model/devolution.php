@@ -51,9 +51,9 @@ if(isset($_POST['voucher'])){
     }
 }elseif(isset($_POST['nroDevolution'])){
 
-    $nroDevolution = $_POST['nroDevolution'];
-    $barcode = $_POST['barcode'];
-    $description = $_POST['description'];
+    $nroDevolution = mysqli_real_escape_string($conexion, $_POST['nroDevolution']);
+    $barcode = mysqli_real_escape_string($conexion, $_POST['barcode']);
+    $description = mysqli_real_escape_string($conexion, $_POST['description']);    
 
     $sql = "SELECT * FROM SALES WHERE NRO_FACTURA = '$nroDevolution' AND BARCODE = '$barcode'";
     $consult = mysqli_query($conexion, $sql);

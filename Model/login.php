@@ -40,10 +40,10 @@ if(isset($_POST['user'])){
             $user = $row['EMAIL'];
             if(password_verify($passInput, $pass)){
                 $_SESSION['NAME_USER'] = $row['EMAIL'];
+                $_SESSION['TYPE_USER'] = $row['TYPE_USER'];
                 echo "Correcto";
             }else{
-                $_SESSION['NAME_USER'] = $row['EMAIL'];
-                echo "Correcto";
+                echo "Incorrecto";
             }
         }
     }catch(Exception $ex){

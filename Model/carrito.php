@@ -4,13 +4,13 @@ require_once "Conexiones.php";
 //Ingresamos datos a la tabla aux para simular un carrito
 
 if(isset($_POST['cod'])){
-    $cod = $_POST['cod'];
-    $nom = $_POST['nom'];
-    $gram = $_POST['gram'];
-    $cant = $_POST['cant'];
-    $precio = $_POST['pre'];
-    $discount = $_POST['dis'];
-    $embalaje = $_POST['emb'];
+    $cod = mysqli_real_escape_string($conexion, $_POST['cod']);
+    $nom = mysqli_real_escape_string($conexion, $_POST['nom']);
+    $gram = mysqli_real_escape_string($conexion, $_POST['gram']);
+    $cant = mysqli_real_escape_string($conexion, $_POST['cant']);
+    $precio = mysqli_real_escape_string($conexion, $_POST['pre']);
+    $discount = mysqli_real_escape_string($conexion, $_POST['dis']);
+    $embalaje = mysqli_real_escape_string($conexion, $_POST['emb']);    
     
     $sql = "SELECT AMOUNT FROM INVENTARIO WHERE BARCODE = $cod AND PACKAGING = '$embalaje'";
     $consult = mysqli_query($conexion, $sql);
@@ -55,8 +55,9 @@ if(isset($_POST['cod'])){
     }
     //Eliminamos una sola unidad de la tabla detalle
 }elseif(isset($_POST['borrarUnidad'])){
-    $cod = $_POST['borrarUnidad'];
-    $embalaje = $_POST['embalaje'];
+    $cod = mysqli_real_escape_string($conexion, $_POST['borrarUnidad']);
+    $embalaje = mysqli_real_escape_string($conexion, $_POST['embalaje']);
+
     $sql = "DELETE FROM DETAIL_PRODUCT WHERE BARCODE = $cod AND PACKAGING = '$embalaje'";
     $consult = mysqli_query($conexion, $sql);
     $sql2 = "SELECT * FROM DETAIL_PRODUCT";

@@ -16,6 +16,7 @@
 <body>
 <?php
 require 'header.php';
+$typeUser = $_SESSION['TYPE_USER'];
 ?>
 <!-- Mostramos tabla para el administrador -->
 <div class="container">
@@ -25,6 +26,7 @@ require 'header.php';
         </div>
     </div>
 </div>
+<?php if ($typeUser != 3) { ?>
 <div class="container" style="background-color: white; border-radius: 10px;">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -89,6 +91,7 @@ require 'header.php';
     </div>
     <br>
 </div>
+<?php } ?>
 <!-- Mostramos tablas de inventarios -->
 <div class="container" id="contenedor" style="background-color: white; border-radius: 10px;">
     <div class="row">
@@ -128,6 +131,7 @@ require 'header.php';
                         <td><?php echo $row['PRICE']; ?></td>
                         <td><?php echo $row['NOTE']; ?></td>
                         <td>
+                            <?php if ($typeUser != 3) { ?>
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="edit(<?php echo $row['BARCODE'] ?>, 
                                                                                                                                 '<?php echo $row['NAME_PRODUCT'] ?>',
                                                                                                                                 '<?php echo $row['GRAMMAGE_MINIMETERAGE'] ?>', 
@@ -136,10 +140,14 @@ require 'header.php';
                                                                                                                                 '<?php echo $row['NOTE'] ?>',
                                                                                                                                 )">
                             Editar
-                        </button>
+                            </button>
+                            <?php } ?>
                         </td>
-                        </button>
-                        <td><button class="btn btn-danger" onclick="elminarProducto(<?php echo $row['BARCODE'] ?>, '<?php echo $row['NAME_PRODUCT'] ?>')">Eliminar</button></td>
+                        <td>
+                            <?php if ($typeUser != 3) { ?>
+                            <button class="btn btn-danger" onclick="elminarProducto(<?php echo $row['BARCODE'] ?>, '<?php echo $row['NAME_PRODUCT'] ?>')">Eliminar</button>
+                            <?php } ?>
+                        </td>
                     </tr>
                     <?php
                     }

@@ -5,14 +5,14 @@ date_default_timezone_set("America/Bogota");
 if(isset($_POST['cod_entrada'])){
     try {
         $fecha = date("Y-m-d H:i:s");
-        $cod = $_POST['cod_entrada'];
-        $producto = $_POST["producto_entrada"];
-        $precio = $_POST['precio'];
-        $cantidad = $_POST["cantidad_entrada"];
-        $packaging = $_POST['packaging'];
-        $novedad = $_POST["novedades"];
-        $proveedor = $_POST['proveedor_producto'];
-        $priceBuy = $_POST['priceBuy'];
+        $cod = mysqli_real_escape_string($conexion, $_POST['cod_entrada']);
+        $producto = mysqli_real_escape_string($conexion, $_POST["producto_entrada"]);
+        $precio = mysqli_real_escape_string($conexion, $_POST['precio']);
+        $cantidad = mysqli_real_escape_string($conexion, $_POST["cantidad_entrada"]);
+        $packaging = mysqli_real_escape_string($conexion, $_POST['packaging']);
+        $novedad = mysqli_real_escape_string($conexion, $_POST["novedades"]);
+        $proveedor = mysqli_real_escape_string($conexion, $_POST['proveedor_producto']);
+        $priceBuy = mysqli_real_escape_string($conexion, $_POST['priceBuy']);        
         
         $sql3 = "SELECT AMOUNT FROM INVENTARIO WHERE BARCODE = $cod AND PACKAGING = '$packaging'";
         $consult3 = mysqli_query($conexion, $sql3);
@@ -53,16 +53,30 @@ if(isset($_POST['cod_entrada'])){
     }
 }elseif(isset($_POST['idEdit'])){
     try{
-        $id = $_POST['idEdit'];
-        $nom = $_POST['nom'];
-        $cant = $_POST['cant'];
-        $pric = $_POST['pric'];
-        $emb = $_POST['emb'];
-        $preC = $_POST['preC'];
-        $nov = $_POST['nov'];
+        $id = mysqli_real_escape_string($conexion, $_POST['idEdit']);
+        $nom = mysqli_real_escape_string($conexion, $_POST['nom']);
+        $cant = mysqli_real_escape_string($conexion, $_POST['cant']);
+        $pric = mysqli_real_escape_string($conexion, $_POST['pric']);
+        $emb = mysqli_real_escape_string($conexion, $_POST['emb']);
+        $preC = mysqli_real_escape_string($conexion, $_POST['preC']);
+        $nov = mysqli_real_escape_string($conexion, $_POST['nov']);
+                
         $sql = "UPDATE DETAIL_INVENTORY SET NAME_PRODUCT = '$nom', AMOUNT = $cant, PRICE_UNID = $pric, PACKAGING = '$emb', PRICE_BUY = $preC, NOTES = '$nov' WHERE ID = $id";
         $consult = mysqli_query($conexion, $sql);
         if($consult){
+            // $sql1 = "SELECT BARCODE FROM DETAIL_INVENTORY WHERE ID = $id AND PACKAGING = '$emb'";
+            // $consult1 = mysqli_query($conexion, $sql1);
+            // $row = mysqli_fetch_assoc($consult1);
+            // $barcode = $row['BARCODE'];
+            // if($consult1){
+            //     $sql2 = "UPDATE INVENTARIO SET NAME_PRODUCT = '$nom', PRICE = $pric, PACKAGING = '$emb' WHERE BARCODE = '$barcode'";
+            //     $consult2 = mysqli_query($conexion, $sql2);
+            //     if($consult2){
+            //         echo "Correcto";
+            //     }else{
+            //         echo "Incorrecto";
+            //     }
+            // }
             echo "Correcto";
         }
     }catch(Exception $ex){
@@ -70,12 +84,13 @@ if(isset($_POST['cod_entrada'])){
     }
 }elseif(isset($_POST['idEditInv'])){
     try{
-        $id = $_POST['idEditInv'];
-        $nom = $_POST['nom'];
-        $cant = $_POST['cant'];
-        $pre = $_POST['pre'];
-        $emb = $_POST['emb'];
-        $nit = $_POST['nit'];
+        $id = mysqli_real_escape_string($conexion, $_POST['idEditInv']);
+        $nom = mysqli_real_escape_string($conexion, $_POST['nom']);
+        $cant = mysqli_real_escape_string($conexion, $_POST['cant']);
+        $pre = mysqli_real_escape_string($conexion, $_POST['pre']);
+        $emb = mysqli_real_escape_string($conexion, $_POST['emb']);
+        $nit = mysqli_real_escape_string($conexion, $_POST['nit']);
+
         $sql = "UPDATE INVENTARIO SET NAME_PRODUCT = '$nom', AMOUNT = $cant, NIT_VENDOR = '$nit', PRICE = $pre, PACKAGING = '$emb' WHERE ID = $id";
         $consult = mysqli_query($conexion, $sql);
         if($consult){

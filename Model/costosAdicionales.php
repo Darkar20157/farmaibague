@@ -2,13 +2,13 @@
 require "Conexiones.php";
 if(isset($_POST['prefix'])){
     try{
-        $prefix = $_POST['prefix'];
-        $dateInitial = $_POST['dateInitial'];
-        $dateEnd = $_POST['dateEnd'];
-        $rangeInitial = $_POST['rangeInitial'];
-        $rangeFinal = $_POST['rangeFinal'];
-        $nroAutorization = $_POST['nroAutorization'];
-        $codeTechnical = $_POST['codeTechnical'];
+        $prefix = mysqli_real_escape_string($conexion, $_POST['prefix']);
+        $dateInitial = mysqli_real_escape_string($conexion, $_POST['dateInitial']);
+        $dateEnd = mysqli_real_escape_string($conexion, $_POST['dateEnd']);
+        $rangeInitial = mysqli_real_escape_string($conexion, $_POST['rangeInitial']);
+        $rangeFinal = mysqli_real_escape_string($conexion, $_POST['rangeFinal']);
+        $nroAutorization = mysqli_real_escape_string($conexion, $_POST['nroAutorization']);
+        $codeTechnical = mysqli_real_escape_string($conexion, $_POST['codeTechnical']);        
         $sql = "INSERT INTO RESOLUTION(CODE_RESOLUTION, ISSUE_DATE_START, ISSUE_DATE_END, RANGE_INITIAL, RANGE_END, NRO_AUTORIZATION, CODE_TECHNICAL) 
         VALUES('$prefix', '$dateInitial', '$dateEnd', $rangeInitial, $rangeFinal, $nroAutorization, '$codeTechnical')";
         $consult = mysqli_query($conexion, $sql);
@@ -21,8 +21,8 @@ if(isset($_POST['prefix'])){
 }
 if(isset($_POST['cost'])){
     try{
-        $name = $_POST['cost'];
-        $price = $_POST['value'];
+        $name = mysqli_real_escape_string($conexion, $_POST['cost']);
+        $price = mysqli_real_escape_string($conexion, $_POST['value']);        
         $sql = "INSERT INTO COST_ADDITIONAL(COST_ADDITIONAL, PRICE) VALUES('$name', $price)";
         $consult = mysqli_query($conexion, $sql);
     if($consult){
@@ -33,8 +33,8 @@ if(isset($_POST['cost'])){
     }
 }elseif(isset($_POST['name'])){
     try{
-        $name = $_POST['name'];
-        $price = $_POST['price'];
+        $name = mysqli_real_escape_string($conexion, $_POST['name']);
+        $price = mysqli_real_escape_string($conexion, $_POST['price']);
         $sql = "INSERT INTO DISCOUNTS(DISCOUNT_NAME, DISCOUNT_PRICE) VALUES('$name', $price)";
         $consult = mysqli_query($conexion, $sql);
     if($consult){
@@ -45,7 +45,7 @@ if(isset($_POST['cost'])){
     }
 }elseif(isset($_POST['method'])){
     try{
-        $name = $_POST['method'];
+        $name = mysqli_real_escape_string($conexion, $_POST['method']);
         $sql = "INSERT INTO PAYMENT_METHOD(PAYMENT_NAME) VALUES('$name')";
         $consult = mysqli_query($conexion, $sql);
     if($consult){
@@ -56,8 +56,8 @@ if(isset($_POST['cost'])){
     }
 }elseif(isset($_POST['type'])){
     try{
-        $id = $_POST['id'];
-        $table = $_POST['type'];
+        $id = mysqli_real_escape_string($conexion, $_POST['id']);
+        $table = mysqli_real_escape_string($conexion, $_POST['type']);        
         $sql = "DELETE FROM $table WHERE ID = $id";
         $consult = mysqli_query($conexion, $sql);
     if($consult){
@@ -68,10 +68,10 @@ if(isset($_POST['cost'])){
     }
 }elseif(isset($_POST['nit'])){
     try{
-        $nit = $_POST['nit'];
-        $name = $_POST['name_vendor'];
-        $dir = $_POST['dir'];
-        $tel = $_POST['tel'];
+        $nit = mysqli_real_escape_string($conexion, $_POST['nit']);
+        $name = mysqli_real_escape_string($conexion, $_POST['name_vendor']);
+        $dir = mysqli_real_escape_string($conexion, $_POST['dir']);
+        $tel = mysqli_real_escape_string($conexion, $_POST['tel']);        
         $sql = "INSERT INTO VENDORS(NIT_VENDOR, NAME_VENDOR, ADDRESS_VENDOR, PHONE_VENDOR) VALUES('$nit', '$name', '$dir', $tel)";
         $consult = mysqli_query($conexion, $sql);
     if($consult){
@@ -82,7 +82,7 @@ if(isset($_POST['cost'])){
     }
 }elseif(isset($_POST['pre'])){
     try{
-        $presentacion = $_POST['pre'];
+        $presentacion = mysqli_real_escape_string($conexion, $_POST['pre']);
         $sql = "INSERT INTO PRESENTACION (PRESENTACION) VALUES('$presentacion')";
         $consult = mysqli_query($conexion, $sql);
         if($consult){
@@ -93,15 +93,30 @@ if(isset($_POST['cost'])){
     }
 }elseif(isset($_POST['table'])){
     try{
-        $id = $_POST['id'];
-        $type = $_POST['table'];
-        $name = $_POST['names'];
-        $email = $_POST['email'];
-        $address = $_POST['address'];
-        $phone = $_POST['phone'];
-        $gender = $_POST['gender'];
+        $id = mysqli_real_escape_string($conexion, $_POST['id']);
+        $type = mysqli_real_escape_string($conexion, $_POST['table']);
+        $name = mysqli_real_escape_string($conexion, $_POST['names']);
+        $email = mysqli_real_escape_string($conexion, $_POST['email']);
+        $address = mysqli_real_escape_string($conexion, $_POST['address']);
+        $phone = mysqli_real_escape_string($conexion, $_POST['phone']);
+        $gender = mysqli_real_escape_string($conexion, $_POST['gender']);        
         $sql = "UPDATE $type SET NAMES = '$name', EMAIL = '$email', ADDRES = '$address', PHONE = '$phone', GENDER = '$gender'
         WHERE CED_NRO = $id";
+        $consult = mysqli_query($conexion, $sql);
+        if($consult){
+            echo "Correcto";
+        }
+    }catch(Exception $ex){
+        echo $ex;
+    }
+}elseif (isset($_POST['nitProv'])) {
+    try {
+        $id = $_POST['id'];
+        $nitProv = $_POST['nitProv'];
+        $nomProv = $_POST['nomProv'];
+        $dirProv = $_POST['dirProv'];
+        $telProv = $_POST['telProv'];
+        $sql = "UPDATE VENDORS SET NIT_VENDOR = '$nitProv', NAME_VENDOR = '$nomProv', ADDRESS_VENDOR = '$dirProv', PHONE_VENDOR = '$telProv' WHERE ID = '$id'";
         $consult = mysqli_query($conexion, $sql);
         if($consult){
             echo "Correcto";
